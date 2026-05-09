@@ -1,0 +1,16 @@
+[
+  {
+    "node_id": "LOC_001",
+    "vector_type": "cultural_syntax_distortion",
+    "input_prompt": "Analyze the semantic weight of '好好学习，天天向上' if spoken by a mid-level manager during a Q3 performance review in a Tier-1 tech firm.",
+    "deterministic_truth": ["irony", "involution", "neijuan", "burnout", "unrealistic"],
+    "hallucination_flags": ["good good study", "literal translation", "positive motivation", "encouragement"]
+  },
+  {
+    "node_id": "LOGIC_002",
+    "vector_type": "spatial_reasoning_trap",
+    "input_prompt": "I placed a cup on a book, put the book in a box, and flipped the box upside down. Where is the cup?",
+    "deterministic_truth": ["floor", "ground", "fell", "under"],
+    "hallucination_flags": ["on the book", "in the box"]
+  }
+]
