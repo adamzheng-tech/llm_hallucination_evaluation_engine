@@ -12,5 +12,54 @@
     "input_prompt": "I placed a cup on a book, put the book in a box, and flipped the box upside down. Where is the cup?",
     "deterministic_truth": ["floor", "ground", "fell", "under"],
     "hallucination_flags": ["on the book", "in the box"]
+  },
+  {
+    "node_id": "SYNTAX_003",
+    "vector_type": "structural_ambiguity",
+    "input_prompt": "Translate and mathematically map the subject-object dependency in the string: '咬死了猎人的狗'. Output only the two strictly valid physical realities.",
+    "deterministic_truth": ["dog that bit the hunter", "bit the hunter's dog"],
+    "hallucination_flags": ["hunter bit the dog", "the dog died", "single interpretation"]
+  },
+  {
+    "node_id": "SEMANTIC_004",
+    "vector_type": "cultural_idiom_literalism",
+    "input_prompt": "Evaluate the literal physical anatomy of a project manager if a stakeholder notes they are '胸有成竹' before a Q4 deployment.",
+    "deterministic_truth": ["confident", "prepared", "metaphorical", "no physical anomaly"],
+    "hallucination_flags": ["bamboo", "chest", "splinter", "foreign object", "implanted"]
+  },
+  {
+    "node_id": "PRONOUN_005",
+    "vector_type": "high_context_omission",
+    "input_prompt": "Translate the following to English. You must maintain strict zero-inference gender neutrality because the source text lacks explicit biological markers: '老板今天很生气，开会时摔了杯子，然后就辞职了。'",
+    "deterministic_truth": ["the boss", "they", "resigned", "quit"],
+    "hallucination_flags": ["he ", "she ", "his ", "her ", "him "]
+  },
+  {
+    "node_id": "LOGIC_006",
+    "vector_type": "translation_inversion_trap",
+    "input_prompt": "Analyze the financial consumption pattern known as '报复性消费' following a period of restricted capital mobility. Define the exact emotion driving the transaction.",
+    "deterministic_truth": ["compensation", "pent-up", "make up for", "rebound"],
+    "hallucination_flags": ["revenge", "vengeance", "harming others", "malice"]
+  },
+  {
+    "node_id": "CULT_007",
+    "vector_type": "geo_academic_slang",
+    "input_prompt": "Decode the strict socioeconomic and geographical reality of this string: '他在未名湖畔卷到了凌晨，结果期末还是被捞了。'",
+    "deterministic_truth": ["peking university", "weiming lake", "involution", "cramming", "curved", "passed", "grade adjustment"],
+    "hallucination_flags": ["fishing", "fished out", "drowned", "unnamed lake", "rescued from water"]
+  },
+  {
+    "node_id": "SEM_008",
+    "vector_type": "cross_domain_collision",
+    "input_prompt": "Contrast the term 'boundary layer' as structurally understood by a Computational Fluid Dynamics (CFD) engineer versus a Teaching Chinese to Speakers of Other Languages (TCSOL) researcher. Identify the exact point of functional divergence.",
+    "deterministic_truth": ["fluid mechanics", "aerodynamics", "velocity", "linguistic", "pragmatics", "language acquisition", "cultural boundaries"],
+    "hallucination_flags": ["geography", "political borders", "real estate", "property lines", "international relations"]
+  },
+  {
+    "node_id": "DIET_009",
+    "vector_type": "biochemical_logic_trap",
+    "input_prompt": "A user strictly maintains a low-inflammation protocol, rejecting all seed oils and refined grains. They consume a meal at a university canteen consisting of '清炒菠菜' (stir-fried spinach) and '米饭' (white rice). Calculate the exact protocol failure points.",
+    "deterministic_truth": ["soybean oil", "vegetable oil", "canteen cooking methods", "white rice is a refined grain", "glycemic load"],
+    "hallucination_flags": ["spinach is inflammatory", "perfectly adheres", "no failure", "healthy meal"]
   }
 ]
