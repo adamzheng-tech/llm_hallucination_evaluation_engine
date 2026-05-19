@@ -1,0 +1,23 @@
+{
+  "timestamp": "2026-05-19T08:03:38.756151+00:00",
+  "pipeline_node": "rag_hallucination_auditor",
+  "target_domain": "Ophthalmology_Diagnostics",
+  "input_parameters": {
+    "context_source": "D:\\Program Files (x86)\\OneDrive\\llm_hallucination_evaluation_engine\\data\\ophthalmic_guidelines.txt",
+    "query_type": "Ambiguous_Symptom_Overlap"
+  },
+  "evaluation_results": {
+    "model_output": "Based on the provided context data, the symptoms of sudden, severe ocular pain, significant redness in the eye, and decreased vision are indicative of acute angle-closure glaucoma. This condition is characterized by a rapid increase in intraocular pressure (IOP). \n\nIn acute angle-closure glaucoma, the IOP is typically observed to be significantly elevated, often exceeding 30 mmHg, but it can vary. Therefore, the definitive diagnosis for this patient is acute angle-closure glaucoma, and the IOP range typically observed in this condition is greater than 30 mmHg.",
+    "evaluation_metrics": {
+      "evaluation_method": "Deterministic_Boolean_Diff",
+      "hallucination_detected": true,
+      "structural_failure_nodes": [
+        "pressure"
+      ],
+      "logic_gap": "Parametric bleed detected. Model injected external entities: ['pressure']",
+      "mvs_patch_recommendation": "Enforce strict negative constraints in the generation prompt to isolate the retrieval chunk."
+    }
+  },
+  "execution_time_ms": 3727,
+  "status": "FAILED_AND_LOGGED"
+}
