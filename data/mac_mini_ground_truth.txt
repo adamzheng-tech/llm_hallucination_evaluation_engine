@@ -1,0 +1,3451 @@
+Mac mini (M1, 2020) Overview 
+Scope of this Document 
+The Mac mini (M1, 2020) Service Guide provides troubleshooting steps, repair procedures, and other information about this model only. 
+
+
+Features: 
+
+Chip: Apple M1 chip 
+
+8-core
+ CPU with 4 performance cores and 4 efficiency cores 
+
+
+8-core
+ GPU 
+
+
+
+16-core Neural Engine 
+
+Memory: 8GB unified memory, configurable to 16GB 
+
+Storage: 256GB SSD, configurable to: 512GB, 1TB, or 2TB Connections: 
+
+1. 
+Power button 
+
+2. 
+AC Inlet 
+
+3. 
+Gigabit Ethernet port (RJ-45 connector) 
+
+4. 
+Two Thunderbolt / USB 4 ports 
+
+5. 
+HDMI 2.0 port 
+
+6. 
+Two USB-A ports (up to 5 Gb/s) 
+
+7. 
+3.5 mm audio jack 
+
+
+What's New: 
+
+Apple Silicon: Packed with an astonishing 16 billion transistors, the new Apple M1 chip integrates the CPU, GPU, Neural Engine, I/O, and so much more onto a single tiny chip. M1 delivers category-smashing speed, mind-bending graphics, and power efficiency that defy belief. 
+
+The Reference Guide for Mac Computers with Apple Silicon is your primary resource to get you up to speed on Apple silicon. Detailed information is provided in the following sections: 
+
+Apple
+ Silicon Technology Overview 
+
+
+Quick
+ Start 
+
+
+Service
+ Considerations 
+
+
+Frequently
+ Asked Questions (FAQ) 
+
+
+How
+ to Identify a Mac with Apple Silicon 
+
+
+Additional
+ Resources 
+
+
+
+
+Service Considerations: 
+
+Important: Only Apple-certified technicians (OP1859) should repair this computer. 
+
+Diagnostics: Apple Service Toolkit 2 (AST 2) provides the diagnostic suites and tools necessary to successfully triage, complete a repair, and run post-repair tests to validate a successful repair. Details on what types of tests and tools can be run, when to run them and why, can be found in Diagnostics for Mac Computers with Apple Silicon (TP1909). 
+
+System
+ Configuration: After a logic board repair, Mac mini (M1, 2020) will chime twice and automatically start up to Diagnostics Mode when it's connected to power. This behavior will repeat until System Configuration for Mac Computers with Apple Silicon (TP1901) has been run successfully. 
+
+
+Use
+ a 2D barcode scanner to accurately enter the Known Bad Board (KBB) and Known Good Board (KGB) logic board serial numbers into the repair system. Failure to perform this step will result in an inoperative system and an incomplete repair. 
+
+
+Use 
+Apple Configurator 2 (TP1954) after System Configuration (TP1901) is completed successfully. Apple Configurator 2 will install the latest macOS and firmware. 
+
+
+
+
+Status
+ Indicator Light (SIL): The SIL has specific patterns that can assist you in troubleshooting Mac mini (M1, 2020). 
+
+
+
+SIL is Off 
+
+
+SIL is White 
+
+
+Serial Number Location: 
+
+The serial number is located on the bottom of the housing. 
+
+
+
+Reference Guide for Mac Computers with Apple Silicon 
+Contents of this article: 
+
+Apple
+ Silicon Technology Overview 
+
+
+Quick
+ Start 
+
+
+Service
+ Considerations 
+
+
+Frequently
+ Asked Questions (FAQ) 
+
+
+How
+ to identify a Mac with Apple Silicon 
+
+
+Additional
+ Resources 
+
+
+
+Apple Silicon Technology 
+Apple introduces the first Apple silicon designed specifically for the Mac. As a system on a chip (SoC), M1 combines numerous powerful technologies into a single chip, and features a unified memory architecture for dramatically improved performance and efficiency. Many of the technical procedures required to troubleshoot and repair an Intel-based Mac are still relevant for a Mac with Apple silicon. However, some things have changed, such as no SMC or NVRAM resets, a new startup options screen, simplified System Configuration workflow, and more. You'll want to think different when it comes to troubleshooting and repairing a Mac with Apple silicon. 
+
+
+Quick Start 
+This chart will help you quickly identify similarities and differences between a Mac with Apple silicon and previous Intel-based Mac computers. In-depth details related to each topic are provided in the other sections of this article. 
+Topic Startup options macOS Recovery  Apple Silicon Press and hold the power button for 10 seconds. From startup options, select the Options gear, then Continue.  Intel Press and hold the Option (Alt) key immediately after turning on or restarting your Mac. Press the power button, then immediately press and hold the Command ( ) and R key.  Summary Startup options is a new interface to access macOS Recovery, choose a startup disk, launch Diagnostics Mode, and more. Familiar UI and utilities such as Disk Utility and Reinstall macOS. Disk Sharing is a new utility for Mac computers with Apple silicon.  
+Topic  Apple Silicon  Intel  Summary  
+Launch Diagnostics  From startup options, press and hold the Command ( ) and D key.  Press the power button, then immediately press and hold the Option and D key.  Simplified UI makes it easy to start up to Diagnostics Mode.  
+Safe Mode  From startup options, hold the Shift key while you click the startup disk you want to start up from.  Press the power button, then immediately press and hold the Shift key.  Safe Mode (HT201262) may help you diagnose problems.  
+Disk Sharing  From macOS Recovery, choose Utilities > Share Disk.  Press the power button, then immediately press and hold the T key.  Connect a Mac with Apple silicon to another computer using a Thunderbolt or USB-C cable to access files.  
+Diagnostic suites and tests  OS only  EFI and OS  All diagnostic tests and suites are now OS based, can be interactive, and no local net boot server is required because the diagnostic resources are served from the cloud.  
+Reset the SMC  Not required.  Press and hold all of the following keys: Control on the left side of your keyboard, Option (Alt) on the left side of your keyboard, and Shift on the right side of your keyboard. Then press and hold the power button as well.  No need to reset the SMC on a Mac with Apple silicon.  
+Reset NVRAM or PRAM  Not required.  Shut down the Mac, then turn it on and immediately press and hold these four keys together: Option, Command, P, and R.  No need to reset NVRAM on a Mac with Apple silicon.  
+System Configuration  Simplified process. No Host computer or DFU mode required.  Host computer, MCU, and DFU mode.  System Configuration for Mac Computers with Apple Silicon (TP1901) streamlines the repair completion workflow. The workflow for System Configuration for Mac computers with the Apple T2 Security Chip (TP1657) remains the same.  
+Displays  Supports one display up to 6K resolution at 60Hz.  Display support for multiple displays at various resolutions.  Refer to the tech specs for full display support information.  
+Apple Configurator 2  New use cases to revive and restore. Required after logic board replacement.  Used to revive and restore Mac computers with the Apple T2 Security Chip.  New use cases for if a Mac computer with Apple silicon becomes unresponsive and the firmware and software must be revived or restored. Refer to the Service Considerations section below for additional information.  
+
+Service Considerations Diagnostics 
+
+To
+ enter Diagnostics Mode on a Mac with Apple silicon, hold the power button for 10 seconds to start up to startup options, then press and hold Command ( ) + D. 
+
+
+The
+ Mac diagnostic categories in the AST 2 Diagnostic Console have been streamlined to match the categories found 
+
+
+in Diagnostics for iOS. The three diagnostic categories are Triage, Tools, and Post-Repair. 
+
+Refer to TP1909: Diagnostics for Mac Computers with Apple Silicon for additional details, including: 
+
+diagnostic
+ suites and tests available in each of the three categories 
+
+
+when
+ you should run a diagnostic suite or test 
+
+
+which
+ diagnostics you should run after a repair procedure 
+
+
+
+The
+ language selection for Diagnostics Mode on the user's computer is determined by the language setting in the user's macOS. If you need to change the language for Diagnostics Mode, start up to the user's macOS and select the desired language. 
+
+
+Ensure
+ the computer is shutdown after you have finished running diagnostic tests and suites. A Mac with Apple silicon will remain at the Waiting for Support screen in Diagnostics Mode even when the Diagnostic session in the AST 2 Diagnostic Console has been archived. This will cause the battery on a notebook to drain, even if the display is closed. 
+
+
+If
+ you encounter unexpected behavior when attempting to enter Diagnostics Mode or when running diagnostics, check for known diagnostic issues (OP1773) before escalating to Channel Service Support (CSS). 
+
+
+
+
+System Configuration 
+
+System
+ Configuration for Mac Computers with Apple Silicon (TP1901) has been simplified from the process used for Mac computers with the Apple T2 Security Chip (TP1657). 
+
+
+You
+ don't need a host computer to run System Configuration on a Mac with Apple silicon. Also, you don't need to put the computer into DFU mode. 
+
+
+After
+ a logic board repair, the Mac will chime twice on startup until the System Configuration suite is run. This is expected behavior. 
+
+
+A
+ computer or internet device is still needed to initiate a diagnostic session using the AST 2 Diagnostic Console. 
+
+
+
+Apple Configurator 2 
+
+Apple
+ Configurator 2 has the following new use cases: 
+
+
+Revive
+ or restore a Mac with Apple silicon that may have failed an update, installation, or reinstallation from macOS Recovery. 
+
+
+Complete
+ a logic board repair after successfully running the System Configuration suite, by installing the latest versions of macOS and macOS Recovery. 
+
+
+
+
+Find
+ additional details on when to use Apple Configurator 2 . 
+
+
+The
+ ports used to place a Mac with Apple silicon in DFU mode are different than what's used for an Intel-based Mac. Pay close attention to which port you are using whenever DFU mode is required. 
+
+
+
+Frequently Asked Questions (FAQ) 
+Startup 
+
+I hear the startup chime. Can I rely on this for troubleshooting? 
+The return of the startup chime is exciting, however don't rely on it for troubleshooting as there is now an option to turn it on or off in System Preferences > Sound. 
+
+The keyboard and mouse don't seem to be working when the computer is starting up. How can I fix this? 
+Good news! Nothing to fix! Your favorite key combinations will still be used for Intel based Mac computers, such as SMC reset, PRAM reset, safe mode, etc., however they are no longer required for Mac computers with Apple silicon. 
+Startup Options 
+
+The startup options window on a Mac with Apple silicon looks like Startup Manager on an Intel-based Mac. Are they the same? 
+While startup options (HT211873) and Startup Manager (HT202796) both allow you to select a different startup disk the similarities end there. Startup options allows you to start up to macOS Recovery, launch Diagnostics mode, and choose a startup disk to start up in Safe Mode. Think of startup options as the bridge to the different environments you'll use for troubleshooting. 
+Reinstalling macOS 
+
+How do I start up to macOS Recovery? 
+Hold the power button for 10 seconds. Select the Options gear, then Continue to start up to macOS Recovery (HT204904). 
+
+Can I still access Internet Recovery? 
+If you can't start up to macOS or macOS Recovery, attempt to revive the computer. Refer to the Apple Configurator 2 User Guide and follow the revive instructions to update the firmware and macOS Recovery to the latest version. 
+Repair 
+Do I still need to run System Configuration to complete certain repair procedures? 
+Yes. You still need to run the System Configuration suite (TP1901) after installing some replacement parts. However, the process has been simplified for a Mac with Apple silicon. 
+
+Do I need to put a Mac with Apple silicon in DFU mode to run System Configuration? 
+No. For repair procedures that require System Configuration, with the exception of a logic board, a Mac with Apple silicon will start up to macOS. When you replace a logic board, the computer will automatically start up to diagnostics mode. 
+Data Transfer 
+
+I want to show a user how to transfer data to another Mac, but it doesn't appear over Wi-Fi. What should I do? 
+Disk Sharing (TP1908) requires a connection to another Mac with either a USB or Thunderbolt cable. 
+Diagnostics and Troubleshooting 
+
+I'm holding the Shift key during startup to enter Safe Mode, but nothing happens. Has Safe Mode changed? 
+Safe Mode (HT201262) hasn't changed, but the method to start up in Safe Mode has. To start up the computer in Safe Mode, hold the power button for 10 seconds to enter startup options. Then, hold Shift while selecting the desired startup volume. Note: Safe Mode is helpful when validating a possible software issue. 
+I'm holding the Command ( ) and D keys during startup, but can't get into Diagnostics Mode. 
+Start up the Mac to startup options, then press and hold the Command ( ) and D keys to enter Diagnostics Mode. 
+Note: You'll still use the Apple Service Toolkit 2 (AST 2) Diagnostic Console to initiate and run diagnostics tests and suites on the user's computer. 
+SMC and NVRAM resets 
+
+
+Why can't I reset the SMC on a Mac with Apple silicon? 
+While it's still technically possible, the likelihood that you'll need to reset the SMC is incredibly low. The Apple silicon system on a chip (SOC) handles all of the communication previously managed by the System Management Controller (SMC). Because of this, and similar to iOS devices, a shutdown will resolve most issues related power, battery, fans, and other features. 
+
+What about NVRAM? Isn't it possible for that information to become corrupt? 
+Similar to the SMC reset, its unlikely that you'll need to reset NVRAM on a Mac with Apple silicon because the settings that are stored in NVRAM, such as sound volume, display resolution, startup disk selection, etc., are now stored in the System region of the storage volume. 
+
+How to Identify a Mac with Apple Silicon 
+
+Choose
+ About this Mac from the Menu. The description of a Mac with Apple silicon includes the Apple chip name, for example: Apple M1. 
+
+
+Mac
+ notebooks with Apple silicon have a globe icon on the Fn (Function) key. 
+
+
+Mac
+ mini (M1, 2020) has two Thunderbolt / USB 4 ports. 
+
+
+
+Diagnostics for Mac Computers with Apple Silicon 
+This article provides details for running diagnostics on Mac computers with Apple silicon. Diagnostics are critical to properly diagnose, troubleshoot, repair, and validate a repair for Mac computers. 
+Contents of this article: 
+
+Overview 
+
+
+What's New 
+
+
+AST
+ 2 Diagnostic Console Categories 
+
+
+Diagnostics
+ Required Based on Repair Procedure 
+
+
+Additional
+ Resources 
+
+
+
+Overview 
+Understanding the difference between a diagnostic suite, a diagnostic test, and a diagnostic tool, will help you determine which is most appropriate to run and when, depending on the stage of the repair process. The fundamental aspects of diagnostics include: 
+
+Apple
+ Service Toolkit 2 (AST 2): a cloud-based system that contains the diagnostic suites, tests, and tools. 
+
+
+AST
+ 2 Diagnostic Console: a web application used to initiate the diagnostic suites and tools on a user's device, as well as view the results of each. 
+
+
+
+Suite: a collection of tests that are run at the same time. 
+
+Test: single test for a specific part or feature. 
+
+Tool: used to complete a repair or perform a specific task. 
+
+What's New 
+A new infrastructure for AST 2, similar to what's available for iOS, enables simpler, faster, and easier to use diagnostics for Mac computers with Apple silicon. The process of running diagnostics is similar to previous Intel-based Mac computers, however there are new features and benefits specific to Mac computers with Apple silicon: 
+
+User-friendly interface to enter Diagnostics Mode. Hold the power button for 10 seconds to get to Startup Options, then hold Command + D. 
+
+Wi-Fi is now the standard connection method since AST 2 can now interact with frameworks installed in macOS Recovery. Ethernet can still be used. 
+
+OS
+ based diagnostics are often faster than the EFI diagnostics required for Intel-based Mac computers. 
+
+
+All
+ diagnostics are OS based. 
+
+
+Many
+ interactive prompts now appear on the user's computer instead of the AST 2 Diagnostic Console. 
+
+
+Similar
+ to iOS, the AST 2 Diagnostic Console has been streamlined into the following three categories: Triage Tools Post-Repair 
+
+
+
+
+
+
+AST 2 Diagnostic Console Categories 
+Triage 
+The Triage category of the AST 2 Diagnostic Console contains suites intended to quickly identify, confirm, and verify potential hardware issues. It's important to remember that Triage doesn't just take place at the beginning of a repair. You may replace a part and then discover a new issue. You'll need to use the Triage diagnostics to identify the part causing the new issue. The following quick checks can be run with the user to help confirm the reported hardware issue. Important: Run MRI anytime a computer will be checked in for repair. 
+
+MRI 
+
+
+Display Anomalies 
+
+
+Image
+ Persistence Keyboard 
+
+
+Power
+ Adapter 
+
+
+Touch
+ ID 
+
+
+Touch
+ Bar Response 
+
+
+Touch
+ Bar Pixel Anomalies Trackpad 
+
+
+Cooling
+ System 
+
+
+Graphics
+ and Display Audio Memory 
+
+
+Full
+ System Diagnostic 
+
+
+
+
+
+
+Note: Full System Diagnostic can be run prior to a repair to help you identify intermittent hardware issues. Tools 
+The Tools category contains the System Configuration suite (TP1901) which must be run to complete a repair of a display, logic board, top case, or Touch ID board. 
+
+Post-Repair 
+The Post-Repair category contains the diagnostic suites used to validate a repair, such as Post-Repair Diagnostic and Trackpad Calibration Check. 
+
+
+Diagnostics Required Based on Repair Procedure 
+After completing a repair on a Mac with Apple silicon, consult the charts below to determine which post-repair diagnostics to run. 
+Mac Notebooks with Apple Silicon 
+Module  Repair Completion  Post-Repair Verification  
+Audio Board Audio Board Flex Assembly Audio Board Flex Cable  〞  . Audio . Post-Repair Diagnostic . Trackpad Calibration Check  
+Battery  〞  . Post-Repair Diagnostic . Trackpad Calibration Check  
+BMU Flex Cable  〞  . Post-Repair Diagnostic . Trackpad Calibration Check  
+Bottom Case  〞  . MRI . Trackpad Calibration Check  
+Display  . System Configuration  . Post-Repair Diagnostic . Trackpad Calibration Check  
+eDP Flex Cable  〞  . Post-Repair Diagnostic . Trackpad Calibration Check  
+Fan(s)  〞  . Post-Repair Diagnostic . Trackpad Calibration Check  
+I/O Board  〞  . Post-Repair Diagnostic . Trackpad Calibration Check  
+IPD Flex Cable  〞  . MRI . Keyboard . Trackpad Calibration Check  
+Logic Board  . System Configuration . Use Apple Configurator 2 (TP1954) to update firmware and install latest macOS.  . Post-Repair Diagnostic . Trackpad Calibration Check  
+Speakers  〞  . Post-Repair Diagnostic . Trackpad Calibration Check  
+Top Case  〞  . Post-Repair Diagnostic . Keyboard . Trackpad . Touch Bar Response . Touch Bar Pixel Anomalies . Trackpad Calibration Check  
+Top Case with Battery  . System Configuration  . Post-Repair Diagnostic . Keyboard . Trackpad . Touch Bar Response . Touch Bar Pixel Anomalies . Trackpad Calibration Check  
+Touch ID Board  . System Configuration  . Post-Repair Diagnostic . Touch ID . Trackpad Calibration Check  
+Touch ID Shim  〞  . MRI . Touch ID . Trackpad Calibration Check  
+Trackpad Trackpad Flex Cable  〞  . Post-Repair Diagnostic . Trackpad Calibration Check  
+Vent/Antenna Module  〞  . Post-Repair Diagnostic . Trackpad Calibration Check  
+
+Mac Desktops with Apple Silicon 
+Module  Repair Completion  Post-Repair Verification  
+Antenna Plate  〞  . MRI  
+Bottom Cover  〞  . MRI  
+Coin Cell Battery  〞  . Post-Repair Diagnostic  
+Fan(s)  〞  . Post-Repair Diagnostic  
+Housing  〞  . Post-Repair Diagnostic  
+I/O Wall  〞  . Post-Repair Diagnostic  
+Logic Board  . System Configuration . Use Apple Configurator 2 (TP1954) to update firmware and install latest macOS.  . Post-Repair Diagnostic  
+Power Supply  〞  . Post-Repair Diagnostic  
+Speakers  〞  . Post-Repair Diagnostic  
+
+
+Common Troubleshooting Procedures for Mac Computers with Apple Silicon 
+Caution: Apple recommends that users back up their data before attempting any software troubleshooting. Essential files should be backed up before installing or reinstalling macOS. Apple is not responsible for any loss of data. 
+Before you begin troubleshooting, have the user attempt to reproduce the issue, then attempt to reproduce the issue yourself. Attempt the common troubleshooting procedures in the order listed in the table below. 
+Always refer to the troubleshooting procedures listed in the Service Guide of the Mac you're troubleshooting. 
+Important: The following steps may not be effective for all issues. Apply only the steps necessary to isolate and resolve the user's issue. 
+Procedure  Action  
+Minimal Risk for Data Loss  
+For Mac notebooks, connect to a known-good power outlet, using a known-good Apple Power Adapter and  
+Charge Battery  charge cable to charge the battery for at least 15 minutes. Note: Use the appropriate wattage power adapter.  
+Simple issues may be resolved by logging out, then logging back in to the user account.  
+Log Out  Deselect "Reopen windows when logging back in" to close the app windows that are currently open.  
+Restarting closes all open applications, turns off all hardware components, then restarts the Mac.  
+A restart can quickly resolve a wide range of issues, including the following:  
+. Apps unexpectedly quit.  
+Restart  . Battery life is shorter than expected.  
+. Hardware is not performing as expected.  
+. Interface or apps are slow to respond.  
+For notebooks with Apple silicon, turn off the Mac, then wait 15 seconds before you turn it back on.  
+Shutdown (Reset)  For desktops with Apple silicon, turn off the Mac. Unplug the power cord for 15 seconds, then reconnect the power cord. Wait 5 seconds, then turn it back on.  
+Safe Mode  Start up in Safe Mode (HT201262) to verify that the computer can startup completely without any issues.  
+Update Software  Check for and apply the latest software and firmware updates. Retest for the user's original issue before continuing with further troubleshooting.  
+Press and hold the power button for 10 seconds to attempt to shut down the computer. Then press the  
+Check if in  power button again to attempt to turn on the computer. If the computer turns on, then it was in DFU mode  
+DFU mode  and has power.  
+Greater Risk for Data Loss  
+Start up to macOS Recovery and use Disk Utility (HT210898) to attempt to repair a volume that may be  
+
+
+Repair Disk 
+exhibiting issues. 
+Use macOS Recovery to reinstall macOS (HT204904) while preserving the data on the user volume.
+
+Reinstall 
+In some circumstances, such as a power failure during a macOS upgrade, a Mac may become unresponsive and so the firmware must be revived. A Revive updates the firmware and macOS Recovery to the latest version. A Revive is designed to not make any changes to the startup volume, the user's data volume or any other volumes.
+
+Revive 
+Refer to the Revive steps in the Apple Configurator 2 User Guide. For additional details, refer to TP1954: When you Use Apple Configurator 2. 
+Data Loss Will Occur 
+If you can't access the startup volume, or user's data volume, and you've already attempted a revive using Apple Configurator 2, use Disk Utility in macOS Recovery to erase the startup volume, user's data volume,
+
+Erase Disk 
+or any other volumes. 
+If the computer can't start up to either macOS or macOS Recovery, follow the Restore instructions in the Apple Configurator 2 User Guide to restore the firmware and install the latest versions of macOS and 
+
+Restore 
+macOS Recovery. When this process is complete, any data on any internal volumes is unrecoverable. For additional details, refer to TP1954: When to Use Apple Configurator 2. 
+
+
+Startup Options and macOS Recovery for Mac Computers with Apple Silicon 
+This article contains details about startup options and macOS Recovery for Mac computers with Apple silicon. 
+Contents of this article: 
+
+Startup
+ Options 
+
+
+Startup
+ Disk 
+
+
+Safe
+ Mode 
+
+
+macOS
+ Recovery 
+
+
+Diagnostics
+ Mode 
+
+
+Disk
+ Sharing 
+
+
+Caution: Apple recommends that users back up their data before attempting any software troubleshooting. Essential files should be backed up before installing or reinstalling macOS. Apple is not responsible for any loss of data. 
+
+Startup Options 
+Startup options looks similar to Startup Manager on Intel-based Mac computers, but there are several differences. You can use startup options to do the following: 
+
+Select
+ a different startup disk 
+
+
+Start
+ up in Safe Mode 
+
+
+Start
+ up in macOS Recovery 
+
+
+Start
+ diagnostics 
+
+
+1. 
+On a Mac with Apple silicon, press and hold the power button. After 5 seconds, the Mac will display an Apple logo ( ) and "Continue holding for startup options." 
+
+2. 
+Continue holding the power button. The Mac will display an Apple logo ( ) and "Loading startup options." 
+
+
+
+
+3. You can then release the power button and the computer will continue to the startup options screen. 
+
+Startup Disk 
+
+To
+ choose a different startup disk, select the desired startup disk, then click "Continue." 
+
+
+To
+ set a default startup disk, select the desired startup disk, press the Option or Control key, then click "Always Use." 
+
+
+Multiple
+ versions of macOS can be installed. 
+
+
+
+Safe Mode 
+
+From startup options, select the startup disk, then hold Shift. Click "Continue in Safe Mode" to start up the Mac in Safe Mode (HT201262). 
+
+
+
+macOS Recovery 
+
+Choose
+ the Options gear icon to start up in macOS Recovery. 
+
+
+macOS
+ Recovery is now a complete version of macOS, so features such as VoiceOver are fully supported. 
+
+
+
+You'll always get the latest signed version of macOS. 
+
+An internet connection is required to reinstall macOS. 
+
+Diagnostics Mode 
+1. 
+Press and hold the Command and D keys. After a few seconds, the screen will display "Continue holding to start 
+
+2. 
+Continue holding the two keys until the computer starts up to Diagnostics mode. 
+
+
+
+
+Disk Sharing 
+
+Disk
+ Sharing takes the place of Target Disk Mode, but significantly improves on security because a password is required every time a user wants to access their data on another computer. 
+
+
+A
+ Thunderbolt or USB-C cable is required. 
+
+
+Big
+ Sur is not required for the host Mac. 
+
+
+Mac mini (M1, 2020) Functional Overview 
+Refer to this diagram for symptoms related to the connectors on the logic board. 
+
+1 = Internal speaker 
+
+No
+ internal speaker sound 
+
+
+Distorted
+ sound from internal speaker 
+
+
+2每4 = Wireless antennas (I/O Wall = 2 and 3), (Antenna Plate = 4) 
+
+Weak
+ signal strength over Wi-Fi or Bluetooth 
+
+
+Cannot
+ connect to Wi-Fi networks or Bluetooth peripherals 
+
+
+Slow
+ Wi-Fi or Bluetooth connection speed 
+
+
+5 = Backup battery (coin cell battery) 
+
+Incorrect
+ date and time settings 
+
+
+Incorrect
+ configuration settings 
+
+
+No
+ startup or video 
+
+
+6 = Power supply 
+
+Computer
+ does not turn on 
+
+
+Intermittent
+ shutdowns 
+
+
+Fan
+ runs unusually fast (power supply thermal sensor not reading) 
+
+
+7 = Fan 
+
+Not
+ running or running fast 
+
+
+System
+ freezes 
+
+
+Intermittent
+ shutdowns 
+
+
+8 = Status Indicator Light (SIL) 
+
+No
+ power ON (shorted cable) 
+
+
+No
+ sleep LED status 
+
+
+9 = Power button flex cable (located on the other side of the logic board) 
+
+Computer does not turn on when power button is pressed 
+10 = Ethernet RJ-45 
+
+No
+ wired Ethernet connectivity 
+
+
+Wired
+ Ethernet data transfer issues 
+
+
+11 = Thunderbolt / USB 4 (2) 
+
+USB
+ connectivity issues 
+
+
+USB
+ power issues 
+
+
+No
+ video to external display 
+
+
+No
+ audio to external display speakers 
+
+
+Thunderbolt
+ device not found 
+
+
+Thunderbolt
+ controller not recognized 
+
+
+Thunderbolt
+ driver issue 
+
+
+Thunderbolt
+ power issues 
+
+
+12 = HDMI 
+
+No
+ HDMI video connectivity to external display 
+
+
+Distorted
+ image on external display 
+
+
+13 = USB-A (2) 
+
+USB
+ connectivity issues 
+
+
+USB
+ power issues 
+
+
+
+14 = Audio jack (input/output) (3.5 mm) 
+
+No
+ external analog audio input 
+
+
+No
+ external analog audio output 
+
+
+No
+ headset controls or mic input 
+
+
+
+
+
+Mac mini (M1, 2020) Measuring Coin Cell Battery Voltage 
+A dead coin cell battery may prevent the computer from operating. 
+1. 
+Shut down the computer. 
+
+2. 
+Disconnect all cables and unplug the power cord. 
+
+3. 
+Remove the bottom cover (RP1709) and antenna plate (RP1710) to access the coin cell battery. Note: The coin cell battery provides power to the RTC (real-time clock) when the computer is not connected to AC power. 
+
+4. 
+Measure the battery voltage by using a voltmeter set for DC (TP1957). 
+
+5. 
+The battery can be measured two ways. If you measure the battery while it is installed in the logic board, touch the positive multimeter probe (red) to the positive side of the battery and the negative multimeter probe (black) to a metal grounding point on the logic board chassis. If you measure the battery after removing it from the logic board, touch the positive multimeter probe to the positive side of the battery and the negative multimeter probe to the negative side of the battery. If the voltage is 2.7V or less, replace the battery. 
+
+6. 
+Reinstall the coin cell battery and reassemble the computer. 
+
+7. 
+Turn on the computer. 
+
+8. 
+If the computer starts up successfully, check for and apply the latest software and firmware updates. 
+
+9. 
+The removal of the coin cell battery also resets the date and time. Use System Preferences > Date & Time to adjust back to the actual date and time settings. 
+
+
+
+
+Bluetooth or Wi-Fi Issues 
+Unlikely causes: Likely Causes: Logic board, antenna plate, rear I/O wall. Quick Check 
+Symptoms 
+
+Quick Check For Bluetooth issues: 
+1. 
+In System Preferences > Bluetooth, verify that Bluetooth is on. 
+
+2. 
+Attempt to pair the computer with a known-good Bluetooth keyboard, mouse, or trackpad. 
+
+3. 
+Reset the Bluetooth device or delete the pairing (if applicable). 
+
+
+For Wi-Fi issues: 
+4. 
+In System Preferences > Network, verify that Wi-Fi is on. 
+
+5. 
+Attempt to connect the computer to a known-good Wi-Fi network. 
+
+6. 
+Create a new network location in System Preferences. 
+
+
+For Bluetooth or Wi-Fi issues: 
+7. If the customer is using a USB device, review
+
+Bluetooth service not available. 
+
+HT201163: About USB on Mac computers to identify
+
+Cannot turn Bluetooth on. 
+
+possible interference with Wi-Fi and Bluetooth
+
+Bluetooth can be turned on, but the computer is unable communications if the device is positioned near theirto pair with a known-good Bluetooth device. 
+antennas.
+
+Intermittent loss of communication with paired Bluetooth 8. If the user＊s computer pairs Bluetooth devices correctlydevice. 
+or connects to Wi-Fi correctly at your service location,
+
+Data transfer over Bluetooth times out or is too slow. 
+research potential sources of interference in the user＊s environment, such as microwave ovens or cordless
+
+Wi-Fi service not available. 
+
+phones in the 2.4/5GHz range. Refer to HT201542:
+
+Cannot turn Wi-Fi on. 
+
+Resolve Wi-Fi and Bluetooth issues caused by wireless
+
+Wi-Fi can be turned on, but cannot connect to known-interference.
+good Wi-Fi network. 
+
+
+9. Refer to HT202663: If your Mac doesn＊t connect to the
+Intermittent loss of Wi-Fi communication. 
+
+Internet over Wi-Fi to familiarize yourself with the
+Poor Wi-Fi signal. 
+
+macOS Wireless Diagnostic utility. 
+10. 
+Important: Check for and apply the latest software and firmware updates to the user＊s computer. Retest for the user＊s original issue before continuing with further troubleshooting. To determine if the user＊s Mac needs updating, refer to HT201260: Find out which macOS your Mac is using. To update macOS, refer to HT201541: How to update the software on your Mac. You may need to connect to a wired network to complete all updates 
+
+If an update is available, perform the update on the user＊s computer and repeat this process until no further updates are available. Then retest for the user＊s original issue before continuing with further troubleshooting. 
+
+11. 
+Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting. 
+
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Run AST 2 Mac Resource Inspector diagnostic suite (MRI) on the user＊s computer. Examine diagnostic results to verify that the wireless module is detected. Is wireless module hardware detected?  Yes  Go to step 2.  ${nodeText.yesSymptomCode}  
+No  Replace the logic board. Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. Verify that the issue is resolved.  M99  MLB  
+Follow Service Guide procedures to open the computer and remove  Yes  Go to step 3.  ${nodeText.yesSymptomCode}  
+2.  the logic board. Locate the wireless antenna connectors on the logic board. Unplug and inspect the antenna cables and their connectors for any signs of pinched wires or connector damage. Do the antenna cables or connectors show signs of damage?  No  Go to step 4.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+A 
+Determine which wireless antenna is damaged: 
+A. Antenna going to antenna 
+
+plate 3. 
+B. Antennas going to rear I/O 
+wall 
+Which wireless antenna is damaged? 
+B 
+With the antenna cables unplugged, inspect the wireless antenna cable connectors on the logic board for housing or pin Yesdamage.
+
+4. 
+Do the antenna connectors on the logic board show signs of damage? 
+Replace the antenna plate. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+Replace the rear I/O wall. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+X03 
+PIECE PART 
+OTHER
+X03 
+ELECTRIC 
+M24 
+MLB 
+Go to step 5.
+No 
+
+${nodeText.noSymptomCode} 
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Go to step 6.
+
+Yes 
+${nodeText.yesSymptomCode} 
+Reseat the antenna cable connectors to the logic board, then retest for the Wi-Fi or 
+
+5. 
+Bluetooth issue. No 
+Is the issue resolved? 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+M99 
+MLB 
+For Bluetooth, pair with a known-good Bluetooth device and verify that the connection is sustained  Yes  The issue is resolved.  ${nodeText.yesSymptomCode}  
+for several minutes.  
+6.  For WI-Fi, connect to a known-good wireless network and retest data throughput, checking for adequate transfer speeds.  ESCALATION  
+Verify that wireless connection is sustained for several minutes.  No  REQUIRED.  ${nodeText.noSymptomCode}  
+Run AST 2 Post-Repair Diagnostic suite if available, to ensure no other issues remain.  Contact CSS for additional suppor a multipart repair.  ort  
+Is the issue resolved?  
+
+
+
+Ethernet Issues 
+Unlikely causes: Likely Causes: Logic board. Quick Check 
+Symptoms  Quick Check  
+No Ethernet device present. Unable to access Ethernet network resources. Ethernet device shows no connection. Ethernet device unable to get an IP address. Slow Ethernet network performance.  1. Verify that nothing is inserted into the Ethernet port on the user＊s computer. Visually inspect the port for damage or debris. Use compressed air to clean and remove any debris. 2. Connect the user's computer to a known-good Ethernet network with a known-good Ethernet cable. Verify that the Ethernet cable＊s RJ-45 connector is not damaged and is securely connected to the Ethernet port on the computer. Remove the cable, then reconnect it to verify it is connected properly and completely. 3. Check System Preferences > Network to verify that built-in Ethernet is active and connected. 4. Create a new network location in System Preferences. 5. Important: Check for and apply the latest software and firmware updates to the user＊s computer. Retest for the user＊s original issue before continuing with further troubleshooting. To determine if the user＊s Mac needs updating, refer to HT201260: Find out which macOS your Mac is using. To update macOS, refer to HT201541: How to update the software on your Mac. You may need to connect to a wired network to complete all updates If an update is available, perform the update on the user＊s computer and repeat this process until no further updates are available. Then retest for the user＊s original issue before continuing with further troubleshooting. 6. Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting.  
+
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Inspect the Ethernet port for dust, debris, damage, or bent pins. Use compressed air to remove debris. Plug in a known-good Ethernet cable and verify all pins make physical contact with the connector. Is the Ethernet port damaged?  Yes  Go to step 2.  ${nodeText.yesSymptomCode}  
+No  Go to step 3.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Yes 
+Inspect the opening on the rear I/O wall for the damaged Ethernet port. Determine whether the opening is misshapen or deformed, preventing proper2. 
+
+insertion of the RJ-45 plug. 
+Is the opening for the Ethernet port damaged or deformed? 
+
+No Replace the rear I/O wall. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+OTHER
+X13 
+ELECTRIC 
+M24 
+MLB 
+Go to step 4.
+
+Yes 
+${nodeText.yesSymptomCode} 
+In System Preferences > Network > Ethernet, verify link status is Connected (green dot) and a valid IP address is listed. Connect the computer to an Ethernet network with a known-good DHCP server. Verify that static DHCP maps or filtering are not3. 
+
+preventing address allocation. 
+
+No 
+Note: DHCP allocation may not be instantaneous, depending on the network. Retest. 
+Is Ethernet link status active? 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+M10 
+MLB 
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Yes 
+Use a simple hub/switch environment. Go to System 
+Preferences > Network > Ethernet and obtain the Router IP address. Use Network Utility to4. 
+
+ping the Router IP address. 
+Is Network Utility able to ping Router IP address? 
+
+No No Ethernet connectivity issues detected. No repair necessary. Problem may be network environment. Refer user to TS1317: Troubleshooting a cable modem, DSL, or LAN Internet connection. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+${nodeText.yesSymptomCode} 
+M10 
+MLB 
+1. Connect Ethernet cable to  The issue is  
+known-good network with  Yes  resolved.  ${nodeText.yesSymptomCode}  
+DHCP server.  
+
+2. 
+In System Preferences > Network > Ethernet, verify link status is Connected (green dot). 
+
+3. 
+Configure TCP/IP settings to Using DHCP and verify valid IP address is obtained from server (not a self-
+
+
+
+5. assigned one with 169.x.x.x). 
+No
+4. Launch web browser. Verify you can access websites and download files 
+Run AST 2 Post-Repair Diagnostic suite if available, to ensure no other issues remain. 
+Is the issue resolved? 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+
+${nodeText.noSymptomCode} 
+
+
+Audio Input Issues 
+Unlikely causes: Likely Causes: Rear I/O wall, speaker, logic board. Quick Check 
+Symptoms  Quick Check  
+Audio input port (headphone jack) does not function, but audio output is functional. Audio input port produces distorted audio. Audio input port cannot be selected.  1. The audio input port (headphone jack) on this computer supports analog audio input signals only. The audio input port on this computer does not support optical audio connections such as TOSLink. 2. Check that no cables are inserted into the headphone jack. Use an otoscope to visually inspect jack. Use compressed air to clean and remove any debris. 3. Connect known-good Apple EarPods with 3.5 mm Headphone Plug to the audio input port (headphone jack) on the user＊s computer. Verify that the 3.5 mm stereo plug is seated fully in the port. 4. Go to System Preferences > Sound, and verify the following: Input tab: External Microphone is available and selected for sound input. ※Input volume§ slider is not set to zero. Output tab: Internal Speakers is available and selected for sound output. ※Output volume§ is not muted or set to zero. 5. Go to System Preferences > Sound > Input tab, and verify that the ※Input level§ indicator moves when speaking into the EarPod＊s microphone. 6. Disconnect all peripheral devices and restart computer. 7. Important: Check for and apply the latest software and firmware updates to the user＊s computer. Retest for the user＊s original issue before continuing with further troubleshooting. To determine if the user＊s Mac needs updating, refer to HT201260: Find out which macOS your Mac is using. To update macOS, refer to HT201541: How to update the software on your Mac. If an update is available, perform the update on the user＊s computer and repeat this process until no further updates are available. Then retest for the user＊s original issue before continuing with further troubleshooting. 8. Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting.  
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Run AST 2 Audio Interactive test suite to verify that the internal speaker produces expected audio test patterns. Does the computer pass AST 2 Audio Test suite?  Yes  The issue cannot be duplicated.  ${nodeText.yesSymptomCode}  
+No  Go to step 2.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Inspect the headphone jack and Yesrear I/O wall opening on the user＊s  Go to step 3.  ${nodeText.yesSymptomCode}  
+computer for any signs of  
+deformation, damage, or debris  
+that may be blocking the  
+connection. Use an otoscope to  
+visually inspect the port.  
+2.  Important: Do not use any metal objects to clear debris or  No  Go to step 4.  ${nodeText.noSymptomCode}  
+obstructions as this can short the  
+connector and cause damage.  
+Is the headphone jack damaged?  
+
+Inspect the opening on the rear I/O wall for the damaged headphone jack. Determine whether the opening is misshapen Yesor deformed, preventing proper3. 
+
+insertion of a 3.5 mm stereo plug. 
+Is the opening for the headphone jack damaged or deformed? 
+Replace the rear I/O wall. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+OTHER
+X13 
+ELECTRIC 
+Go to step 4.
+
+No 
+${nodeText.noSymptomCode} 
+Go to step 5.
+
+Yes 
+${nodeText.yesSymptomCode} 
+Debris in, or damage to, the headphone jack can cause the computer to become stuck in Headphone or External Speaker mode. 
+Use a lighted otoscope or magnifying glass to inspect for
+
+4. 
+damage or debris inside the jack. 
+
+No 
+Use compressed air to clean and remove any debris. 
+Are you able to clean the headphone jack? 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+M24 
+MLB 
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Go to step 6.
+
+Yes 
+${nodeText.yesSymptomCode} 
+Connect known-good Apple EarPods with 3.5 mm Headphone Plug to the audio input port (headphone jack) on the user＊s computer. Verify that the 3.5 mm stereo plug is seated fully in the port. 
+
+5. Retest by going to System Preferences > Sound > Input tab, No 
+and verifying that the input level indicator moves when speaking into the EarPod＊s microphone. 
+Does the computer detect audio through EarPod＊s microphone? 
+
+Yes 
+Run AST 2 Audio Interactive test suite to verify that the internal speaker produces expected audio test patterns.
+
+6. 
+Does the computer pass AST 2 Audio Test suite? 
+
+No Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+The issue was resolved by cleaning the headphone jack. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+M09 
+MLB 
+${nodeText.yesSymptomCode} 
+M09 
+MLB 
+7. 
+Check  Result  Action  Code  Commodity  
+Verify that external audio input is available, selected, and functional, Yes  The issue is resolved.  ${nodeText.yesSymptomCode}  
+and that the ※Input level§ indicator  
+
+moves when speaking into a  
+connected microphone. Then  
+record a sample audio file and  
+play it back to verify that it is free  
+of distortion.  ESCALATION  
+Run AST 2 Post-Repair  No  REQUIRED.  ${nodeText.noSymptomCode}  
+Diagnostic suite if available, to  Contact CSS for  
+ensure no other issues remain.  additional support  
+or a multipart  
+Is the issue resolved?  repair.  
+
+
+
+Speaker or Headphone Jack Issues 
+Unlikely causes: Likely Causes: Rear I/O wall, speaker, logic board. Quick Check 
+Symptoms  Quick Check  
+No sound from headphone jack. No sound from speaker. Sound is distorted, fuzzy, or crackly. Symptom only occurs with internal speaker. Symptom only occurs with external speakers or headphones.  1. Refer to HT203186: If the internal speakers on your Mac aren't working. 2. Go to System Preferences > Sound, and verify the following: Input tab: Internal Microphone is available and selected for sound input. ※Input volume§ slider is not set to zero. Output tab: Internal Speakers is available and selected for sound output. ※Output volume§ is not muted or set to zero. 3. Go to System Preferences > Sound > Input tab, and verify that the ※Input level§ indicator moves when speaking into the microphone. 4. Check that no cables are inserted into the headphone jack. Use an otoscope to visually inspect jack. Use compressed air to clean and remove any debris. 5. Disconnect all peripheral devices and restart computer. 6. Important: Check for and apply the latest software and firmware updates to the user＊s computer. Retest for the user＊s original issue before continuing with further troubleshooting. To determine if the user＊s Mac needs updating, refer to HT201260: Find out which macOS your Mac is using. To update macOS, refer to HT201541: How to update the software on your Mac. If an update is available, perform the update on the user＊s computer and repeat this process until no further updates are available. Then retest for the user＊s original issue before continuing with further troubleshooting. 7. Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting.  
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Run AST 2 Audio Interactive test suite to verify that the internal speaker produces expected audio test patterns. Does the computer pass AST 2 Audio Test suite?  Yes  The issue cannot be duplicated.  ${nodeText.yesSymptomCode}  
+No  Go to step 2.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+Code 
+
+Commodity 
+2. 
+3. 
+4. 
+5. 
+Disconnect any connected headphones or external speakers. Go to System Preferences > Sound > Output tab and verify that Internal Speaker is available and selected for sound output. 
+Does System Preferences list ※Headphones§ instead? Inspect the headphone jack and rear I/O wall opening on the user＊s computer for any signs of deformation, damage, or debris that may be blocking the connection. Use an otoscope to visually inspect the port. 
+Important: Do not use any metal objects to clear debris or obstructions as this can short the connector and cause damage. 
+Is the headphone jack damaged? 
+Inspect the opening on the rear I/O wall for the damaged headphone jack. Determine whether the opening is misshapen or deformed, preventing proper insertion of a 
+3.5 mm stereo plug. 
+Is the opening for the headphone jack damaged or deformed? 
+Debris in, or damage to, the headphone jack can cause the computer to become stuck in Headphone or External Speaker mode. 
+Use a lighted otoscope or magnifying glass to inspect for damage or debris inside the jack. 
+Use compressed air to clean and remove any debris. 
+Are you able to clean the headphone jack? 
+
+Yes 
+No 
+
+Yes 
+No 
+
+Yes 
+No Yes 
+No Go to step 3. 
+Go to step 6. 
+Go to step 4. 
+Go to step 5. 
+Replace the rear I/O wall. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+Go to step 5. 
+Go to step 6. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+
+OTHERX13 ELECTRIC 
+${nodeText.noSymptomCode} ${nodeText.yesSymptomCode} 
+M24 
+
+MLB 
+Check 
+
+Result 
+Action 
+Code 
+
+Commodity 
+Go to step 7.
+
+Yes 
+${nodeText.yesSymptomCode} 
+Connect known-good headphones or external speakers to test the output from the headphone jack. Verify you can hear audio.
+
+6. No 
+Can you hear audio through the headphones or external speakers? 
+Run AST 2 Audio Interactive test suite to verify that the internal speaker produces expected audio Yestest patterns.
+
+7. 
+Does the computer pass AST 2 Audio Test suite? 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+The issue was resolved by cleaning the headphone jack. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+M09 
+
+MLB 
+${nodeText.yesSymptomCode} 
+
+8.  Disconnect headphones or external speakers. Follow Service Guide procedures to remove the internal speaker. Inspect the speaker and connector, and its corresponding connector on the logic board for damage.  No Yes No  Go to step 8. Go to step 9. Go to step 10.  ${nodeText.noSymptomCode} ${nodeText.yesSymptomCode} ${nodeText.noSymptomCode}  
+Is damage found on logic board or speaker connectors?  
+
+Check 
+
+Result 
+Action 
+Code 
+
+Commodity 
+Yes 
+Determine whether there is damage to the speaker, the logic board, or to a combination of multiple components.
+
+9. 
+Is the damage limited to the speaker? 
+Replace the speaker. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+OTHER
+X08 
+
+ELECTRIC 
+No 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+${nodeText.noSymptomCode} 
+
+Issue resolved by reseating speaker Yes 
+connection. Verify 
+${nodeText.yesSymptomCode} resolution. 
+Reinstall the speaker, carefully reseating the speaker connection as you do so. 
+
+Retest to verify you can hear 10. 
+sound through the internal 
+speaker. 
+No 
+Is sound emitted through the internal speaker? 
+Replace the speaker. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+OTHER
+X08 
+
+ELECTRIC 
+11. 
+Check 
+Connect and disconnect headphones or external speakers. Verify that audio can be played through both external and internal speakers, and that sound is clear and free of distortion. 
+Run AST 2 Post-Repair Diagnostic suite if available, to ensure no other issues remain. 
+Is the issue resolved? 
+
+Result  Action  Code  Commodity  
+The issue is  
+Yes  resolved.  ${nodeText.yesSymptomCode}  
+
+No 
+ESCALATION REQUIRED. 
+${nodeText.noSymptomCode} 
+Contact CSS for additional support or a multipart repair. 
+
+
+
+USB-C, Thunderbolt, and HDMI Issues 
+Unlikely causes: Likely Causes: Rear I/O wall, logic board, Apple USB-C adapter. Quick Check 
+Symptoms  Quick Check  
+USB-C devices are not recognized or not powered when connected to computer's USB-C ports. External Thunderbolt devices or displays are not recognized when connected to computer's USB-C ports. External HDMI display is not recognized when  1. Verify that the user is not exceeding the specified maximum number of supported external USB-C devices or displays for this model. Two external displays are supported. 2. Refer to HT201163: About USB on Mac computers. 3. Important: Check for and apply the latest software and firmware updates to the user＊s computer. Retest for the user＊s original issue before continuing with further troubleshooting. To determine if the user＊s Mac needs updating, refer to HT201260: Find out which macOS your Mac is using. To update macOS, refer to HT201541: How to update the software on your Mac. If an update is available, perform the update on the user＊s computer and repeat this process until no further updates are available. Then retest for the user＊s original issue before continuing with further troubleshooting.  
+connected to computer's HDMI port.  4. Also check for adapter firmware updates by leaving the user＊s adapter connected to the computer while running software update. If an update is available, update the adapter＊s firmware before proceeding further, and retest for USB-C connectivity issues. 5. Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting. 6. Refer to the following articles to learn more about Thunderbolt connectivity in this computer: HT207443: Adapters for the Thunderbolt 3 USB-C or USB-C port on your Mac or iPad Pro  
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Determine which computer port has an issue: A. USB-C or Thunderbolt (with or without an adapter) B. HDMI Which computer port has an issue?  A  Go to step 2.  ${nodeText.yesSymptomCode}  
+B  Go to step 8.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Inspect all USB-C ports and rear I/O wall openings on the user＊s  Yes  Go to step 3.  ${nodeText.yesSymptomCode}  
+computer for any signs of  
+deformation, damage, or debris  
+that may be blocking the  
+connection. Use compressed air  
+to clear any obstructions or  
+2.  debris. Important: Do not use any metal objects to clear debris or  No  Go to step 5.  ${nodeText.noSymptomCode}  
+obstructions, as this can short the  
+connector and cause damage.  
+Is any USB-C port damaged?  
+
+Inspect the opening on the rear I/O wall for the USB-C port. Determine whether the opening is misshapen or deformed, Yes
+
+preventing proper insertion of the
+
+3. 
+USB-C plugs. 
+Is the opening for the USB-C port damaged or deformed? 
+Replace the rear I/O wall. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+OTHER
+X13 
+ELECTRIC 
+Go to step 4.
+
+No 
+${nodeText.noSymptomCode} 
+Go to step 5.
+
+Yes 
+${nodeText.yesSymptomCode} 
+Use a lighted otoscope or magnifying glass to inspect for damage or debris inside the connector. 
+
+4. Use compressed air to clean and remove any debris. 
+No 
+Are you able to clean the USB-C connectors? 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+M4 
+MLB 
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Go to step 6.
+
+Yes 
+${nodeText.yesSymptomCode} 
+Connect a known-good USB-C device, such as an external disk, to the USB-C port on the computer. 
+Verify in System Information > USB that the device is detected. 
+
+5. Test both orientations of the connector. 
+Repeat for all USB-C ports. 
+Is the USB-C device detected? 
+Connect a known-good Thunderbolt device such as an external disk to the same USB-C port on the computer. 
+Verify in System Information > Thunderbolt that the device is detected. 
+
+6. Test both orientations of the connector. 
+Repeat for all USB-C ports. 
+Is the Thunderbolt device 
+detected? 
+
+No 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+M37 
+MLB 
+Go to step 7.
+
+Yes 
+${nodeText.yesSymptomCode} 
+No 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+M15 
+MLB 
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Connect a known-good external
+ Thunderbolt or HDMI display to the user＊s computer (using a compatible adapter). 
+
+Yes 
+If the display is equipped with internal speakers, also verify 
+audio output. 
+On the user＊s computer, in System Preferences > Sound > Output, select the external display for sound output. 
+
+On the display, verify that the 7. 
+correct input has been selected. 
+Verify that a good image appears on the external display. 
+
+No 
+Test the audio output using more than one application or website. 
+Test both orientations of the 
+connector. 
+Repeat for all USB-C ports. 
+Does a good image appear on the external display? 
+The issue is isolated to the user＊s USB-C or Thunderbolt peripheral or adapter. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+${nodeText.yesSymptomCode} 
+M37 
+MLB 
+Inspect the HDMI port and rear 
+Go to step 9.
+
+Yes 
+${nodeText.yesSymptomCode}
+I/O wall opening on the user＊s 
+computer for any signs of deformation, damage, or debris that may be blocking the connection. Use compressed air to clear any obstructions or debris. 
+
+8. 
+Go to step 11.
+Important: Do not use any 
+
+No ${nodeText.noSymptomCode} 
+metal objects to clear debris or obstructions as this can short the connector and cause damage. 
+Is the HDMI port damaged? 
+Inspect the opening on the rear I/O wall for the damaged HDMI port. Determine whether the opening is misshapen or Yesdeformed, preventing proper9. 
+
+insertion of the HDMI plug. 
+Is the opening for the HDMI port damaged or deformed? 
+Replace the rear I/O wall. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+OTHER
+X13 
+ELECTRIC 
+Go to step 10.
+
+No 
+${nodeText.noSymptomCode} 
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Go to step 11.
+
+Yes 
+${nodeText.yesSymptomCode} 
+Use a lighted otoscope or magnifying glass to inspect for damage or debris inside the connector. 
+
+10. Use compressed air to clean and remove any debris. 
+No 
+Are you able to clean the HDMI connector? 
+Connect a known-good external
+ HDMI display to the user＊s computer. 
+
+Yes 
+If the display is equipped with internal speakers, also verify audio output. 
+On the user＊s computer, in System Preferences > Sound > Output, select the external display for sound output. 
+
+11. On the display, verify that the correct input has been selected. 
+Verify that a good image appears on the external display. 
+
+No 
+Test the audio output using more than one application or website. 
+Does a good image appear on 
+the external display? 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+The issue is isolated to the user＊s display. Inform the user of findings and refer to HT204388: Connect to HDMI from your Mac for more information. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+M24 
+MLB 
+${nodeText.yesSymptomCode} 
+M28 
+MLB 
+Confirm that known-good USB-C  The issue is  
+and Thunderbolt devices are  Yes  resolved.  ${nodeText.yesSymptomCode}  
+functional and recognized when  
+
+connected to all USB-C ports on the computer, in both orientations. 
+Confirm that known-good HDMI displays are functional and12. 
+
+recognized when connected to the HDMI port on the computer. 
+
+No 
+Run AST 2 Post-Repair Diagnostic suite if available, to ensure no other issues remain. 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+
+${nodeText.noSymptomCode} 
+Is the issue resolved? 
+
+
+
+Computer Feels Unusually Warm or has Unusual Odors 
+Unlikely causes: Likely Causes: Fan, power supply, logic board. Quick Check 
+
+Symptoms  Quick Check  
+Computer feels unusually warm. Computer emits a burning, smoky, or other unusual odor. Excessive fan noise.  1. Disconnect all peripheral devices and restart computer. 2. This computer has vents at the bottom to bring in cool air from beneath the device and vent hot air from the back. Verify the temperature issue with the computer resting on a hard, flat surface. Use this opportunity to educate the user about inappropriate work surfaces that may cause the computer to overheat. 3. Ensure the fan spins during operation. Verify vents are not blocked. Blow out any dust or debris from rear fan exhaust with compressed air. 4. Compare the computer＊s operating temperature to a known-good, similarly configured computer. 5. Be aware that new computers will run hotter and louder during initial setup and Spotlight indexing. This is normal behavior and is not considered a service issue. 6. Check for runaway applications using the information in HT203184: See how apps affect Mac performance, battery runtime, temperature, and fan activity. Follow the instructions to halt any processes that are using excessive system resources. 7. Processor-intensive or graphics-intensive applications and system processes may cause the enclosure to feel warm. Use Activity Monitor to identify these types of applications and explain the issue to the user. 8. Important: Check for and apply the latest software and firmware updates to the user＊s computer. Retest for the user＊s original issue before continuing with further troubleshooting. To determine if the user＊s Mac needs updating, refer to HT201260: Find out which macOS your Mac is using. To update macOS, refer to HT201541: How to update the software on your Mac. If an update is available, perform the update on the user＊s computer and repeat this process until no further updates are available. Then retest for the user＊s original issue before continuing with further troubleshooting. 9. Inspect the enclosure and components for obvious signs of burning or smoky residue. 10. Clean the enclosure to eliminate any causes due to external contamination. 11. Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting.  
+
+Deep Dive 
+
+Check  Result  Action  Code  Commodity  
+1.  Determine whether this is a safety issue. Do not perform procedures that can be a safety risk to you or the user. Have you identified a safety issue?  Yes  ESCALATION REQUIRED. Contact CSS for safety-related issues. Refer to article OP44: Handling Potential Product Safety Issues. Retail: Document the issue and escalate following the steps in RS60: Product Safety Escalations.  ${nodeText.yesSymptomCode}  
+No  Go to step 2.  ${nodeText.noSymptomCode}  
+2.  Determine if the computer is unusually warm or has unusual odors: A. Unusually warm B. Unusual odors Which issue is identified?  A  Go to step 3.  ${nodeText.yesSymptomCode}  
+B  Go to step 12.  ${nodeText.noSymptomCode}  
+3.  While connected to the user＊s power adapter and charging cable, run AST 2 Mac Resource Inspector diagnostic suite (MRI) to gather diagnostic information about the computer. MRI will report a failure if any sensors are not detected or are exceeding expected thermal values. Does the computer pass all MRI tests?  Yes  Go to step 4.  ${nodeText.yesSymptomCode}  
+No  Go to step 5.  ${nodeText.noSymptomCode}  
+4.  Run AST 2 Cooling System Diagnostic (CSD) diagnostics suite. CSD works like a stress test on the computer, gathering information about the thermal performance while various components are under heavy use. Does the computer pass all CSD tests?  Yes  The computer passed all thermal checks and is operating within specifications. The issue cannot be duplicated.  ${nodeText.yesSymptomCode}  
+No  Go to step 5.  ${nodeText.noSymptomCode}  
+
+Check 
+Result 
+Action 
+Code 
+
+Commodity 
+5. 
+6. 
+7. 
+8. 
+A disconnected or malfunctioning fan will prevent proper cooling and may cause thermal sensors to exceed expected values. An obstructed fan or heat sink may also cause excessive fan noise. 
+Check diagnostic results for fan motor failures. 
+Did diagnostics report any fan motor test failure? Follow Service Guide procedures to open the computer. 
+Disconnect and inspect the fan cable and its connectors, looking for connector or cable damage. 
+Also check for damage on the logic board fan cable connectors. 
+Did you find damage to this cable or any connectors? 
+Determine whether the damage is located on the fan cable, or other parts. 
+Is the damage limited to the cable? 
+Carefully reseat the fan cable into its connector. 
+Reassemble the computer and run diagnostics again. 
+Do diagnostics still report a fan failure? 
+Yes 
+No 
+Yes 
+No 
+Yes 
+No 
+Yes 
+No Go to step 6. 
+
+Go to step 10. 
+Go to step 7. 
+Go to step 8. 
+Replace the fan. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+Go to step 9. 
+Issue resolved by reseating fan cable. Verify resolution. 
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+
+OTHER
+X22 
+
+ELECTRIC 
+${nodeText.noSymptomCode} 
+
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+Check 
+Result 
+Action 
+Code 
+
+Commodity 
+Remove the fan to reveal inner side of heat sink. Use an ESD-safe vacuum to remove dust and Yesdebris from heat sink and fan. 
+9. Reassemble the computer and run diagnostics again. 
+Do diagnostics still report a fan failure? 
+
+Replace the fan. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+OTHER
+X22 
+
+ELECTRIC 
+Issue resolved by cleaning fan and No 
+heat sink. Verify 
+${nodeText.noSymptomCode} resolution. 
+Check diagnostic results for failures related to power supply thermal sensor errors. 
+Yes 10. 
+Did diagnostics report any power 
+supply thermal sensor errors? 
+
+Replace the power supply. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+POWER
+P17 
+
+SUPPLY 
+Go to step 11.
+No 
+${nodeText.noSymptomCode} 
+Check diagnostic results for failures related to any other logic board thermal sensor errors. 
+Yes 11. 
+Did diagnostics report any logic 
+board thermal sensor errors? 
+
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+M18 
+
+MLB 
+Go to step 12.
+No 
+${nodeText.noSymptomCode} 
+
+
+Check 
+Result 
+Action 
+Code 
+
+Commodity 
+Closely inspect internal hardware and the enclosure for other possible causes of odor, such as bulging or vented chip capacitors, or visible residue or burn marks 
+17. on the enclosure, logic board, or other components. 
+Have you identified a component failure as the source of the odor? 
+Use Cooling System Diagnostic to verify that the computer is running within thermal specifications. 
+18. Run AST 2 Post-Repair Diagnostic suite if available, to ensure no other issues remain. 
+Is the issue resolved? 
+Yes 
+No Yes 
+No 
+
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+The issue cannot be duplicated. 
+The issue is resolved. 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} ${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+
+
+
+Mechanical, Physical, or Cosmetic Damage 
+Unlikely causes: 
+
+There are no unlikely causes for this issue. 
+Quick Check 
+
+Symptoms  Quick Check  
+1. Inspect the computer and discuss the nature of the issue  
+with the user. Determine whether the user wants to  
+The computer shows signs of physical or cosmetic damage such as:  proceed with the repair (despite possible accidental damage) or pursue other service options. Click ※No§ to proceed with further troubleshooting.  
+Dented or scratched enclosure. Screw is stripped, loose, or missing. Broken or damaged internal or external components, cables, or connectors. Liquid spill.  2. Refer to TP1151: Visual/Mechanical Inspection (VMI) Guide for Mac Computers - Table of Contents for guidance regarding possible damage to the user＊s computer. 3. Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement  
+to ensure that the new part operates properly with the  
+rest of the system.  
+
+
+Deep Dive 
+
+Check  Result  Action  Code  Commodity  
+1.  Determine whether issue involves a safety risk. Do not perform procedures that can be a safety risk to you or the user. Have you identified a safety issue?  Yes  ESCALATION REQUIRED. Contact CSS for safety-related issues. Refer to OP44: Handling Potential Product Safety Issues. Retail: Document the issue and escalate following the steps in RS60: Product Safety Escalations.  ${nodeText.yesSymptomCode}  
+No  Go to step 2.  ${nodeText.noSymptomCode}  
+2.  Closely examine the user＊s computer for signs of enclosure damage as described in symptoms. Does the computer exhibit this type of damage?  Yes  Proceed with repair creation to see available options. Inform the user that computer failures due to accidental damage are not covered by Apple＊s one-year limited warranty or the AppleCare Protection Plan (APP). Refer to www.apple.com/legal/warranty for details.  X12  ENCLOSURE  
+No  Go to step 3.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+Code 
+
+Commodity 
+Closely examine the user＊s computer enclosure for signs of liquid spill damage. 
+Look for any signs of liquid Yesspill, liquid penetration, or3. 
+liquid damage to the computer＊s enclosure. 
+Does the computer exhibit this type of damage? No 
+Yes 
+Closely examine the user＊s AC power cord for signs of mechanical damage. 
+4. 
+
+Does the AC power cord exhibit any damage? 
+No Proceed with repair creation to see available options. Inform the user that computer failures due to accidental damage are not covered by Apple＊s one-year 
+limited warranty or the  
+AppleCare Protection Plan  X90  
+(APP).  
+Refer to  
+www.apple.com/legal/warranty  
+for details.  
+Go to step 4.  ${nodeText.noSymptomCode}  
+Proceed with repair creation to  
+see available options. Inform  
+the user that computer failures  
+due to accidental damage are  
+
+not covered by Apple＊s one-year limited warranty or the AppleCare Protection Plan 
+X03 (APP). 
+Refer to 
+www.apple.com/legal/warranty 
+for details. 
+ESCALATION REQUIRED. 
+${nodeText.noSymptomCode} 
+Contact CSS for assistance with Apple-related accidental damage. 
+
+ENCLOSURE 
+EXTERNAL CABLE 
+
+
+Noise, Hum, or Vibration 
+Unlikely causes: Likely Causes: Fan, power supply. Quick Check 
+Symptoms  Quick Check  
+Computer emits noise, hum, or vibration.  Note: Verify the issue after using the computer for a few minutes to warm it, or by following steps in HT207571: Warm a Mac for testing. Doing this may help identify intermittent issues. 1. Work with user to reproduce issue and isolate source of noise. 2. Verify vents on bottom and back of computer are free of dust and debris that might inhibit proper airflow through computer. 3. If necessary, explain to user that some noises are normal. Refer to HT202179: About fans and fan noise in your Apple product. 4. Run AST 2 Mac Resource Inspector diagnostic suite (MRI) to gather diagnostic information about the computer. MRI will report a failure if any sensors are not detected or are exceeding expected thermal values. An unreadable thermal sensor can cause a fan to run excessively. If MRI reports any thermal sensor failures, return to the list of symptoms and select ※Computer Feels Unusually Warm or has Unusual Odors§. Otherwise, continue troubleshooting. 5. Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting.  
+
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Shut down the computer and let it cool off fully. Once the computer is cold, start it up and check for noise, hum, or vibration. Does issue persist during cold startup?  Yes  Go to step 2.  ${nodeText.yesSymptomCode}  
+No  Go to step 8.  ${nodeText.noSymptomCode}  
+A disconnected or malfunctioning fan will prevent proper cooling  Yes  Go to step 3.  ${nodeText.yesSymptomCode}  
+2.  and may cause thermal sensors to exceed expected values. An obstructed fan or heat sink may also cause excessive fan noise. Check diagnostic results for fan motor failures. Did diagnostics report any fan motor test failure?  No  Go to step 8.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+Code 
+
+Commodity 
+Follow Service Guide procedures to open the computer.  Yes  
+3.  Disconnect and inspect the fan cable and its connectors, looking for connector or cable damage. Also check for damage on the logic board fan cable connectors.  No  
+Did you find damage to this cable or any connectors?  
+
+Yes 
+Determine whether the damage is located on the fan cable, or other parts. 
+4. 
+Is the damage limited to the cable? 
+No 
+With fan disconnected, briefly retest for noise, hum, or vibration. 
+Yes 5. 
+Has noise been eliminated? 
+No Go to step 4. 
+
+Go to step 5. 
+Replace the fan. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+Replace the fan. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+Go to step 6. 
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+
+OTHER
+X23 
+
+ELECTRIC 
+${nodeText.noSymptomCode} 
+
+OTHER
+X23 
+
+ELECTRIC 
+${nodeText.noSymptomCode} 
+Check 
+
+Result 
+Action 
+Code 
+
+Commodity 
+Carefully reseat the fan cable into 
+
+Go to step 7.
+Yes 
+
+${nodeText.yesSymptomCode}
+its connector. 
+Reassemble the computer and 6. 
+run diagnostics again. No 
+Do diagnostics still report a fan failure? 
+Remove the fan to reveal inner side of heat sink. Use an ESD-safe vacuum to remove dust and Yesdebris from heat sink and fan. 
+7. Reassemble the computer and run diagnostics again. 
+Do diagnostics still report a fan failure? 
+
+Issue resolved by reseating fan cable. Verify resolution. 
+Replace the fan. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+${nodeText.noSymptomCode} 
+
+OTHER
+X23 
+
+ELECTRIC 
+Issue resolved by cleaning fan and No 
+heat sink. Verify 
+${nodeText.noSymptomCode} resolution. 
+Connect computer to AC power and listen carefully, close to internal power supply. 
+Yes 8. 
+Is noise coming from power 
+supply? 
+
+Replace the power supply. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+POWER
+P04 
+
+SUPPLY 
+Go to step 9.
+No 
+${nodeText.noSymptomCode} 
+Check 
+
+Result 
+Action 
+Code 
+
+Commodity 
+Issue resolved.  
+9.  Disconnect any peripheral devices, cards, or cables attached to computer. Has noise been eliminated?  Yes  Issue caused by ground loop induced by third-party devices. Advise user to connect all devices to a common power outlet or contact device manufacturer for support.  ${nodeText.yesSymptomCode}  
+10.  Noise may be related to interference from other electrical devices operating near computer or plugged into same power outlet. See if noise is eliminated when computer runs in a different location on a different circuit. Has noise been eliminated?  No Yes No  Go to step 10. ${nodeText.noSymptomCode} Issue resolved. Verify resolution. ${nodeText.yesSymptomCode} ESCALATION REQUIRED. ${nodeText.noSymptomCode} Contact CSS for additional support or a multipart repair.  
+Verify that noise, hum, or vibration is resolved.  Yes  The issue is resolved.  ${nodeText.yesSymptomCode}  
+11.  Use Cooling System Diagnostic to verify that the computer is running within thermal specifications. Run AST 2 Post-Repair Diagnostic suite if available, to ensure no other issues remain. Is the issue resolved?  No  ESCALATION REQUIRED. ${nodeText.noSymptomCode} Contact CSS for additional support or a multipart repair.  
+
+
+
+Intermittent Shutdown, Kernel Panic, or System Instability 
+Unlikely causes: Likely Causes: Logic board. Quick Check 
+Symptoms  Quick Check  
+Note: Verify the issue after using the computer for a few  
+minutes to warm it, or by following steps in HT207571: Warm  
+a Mac for testing. Doing this may help identify intermittent  
+issues.  
+1. Collect the following details from the user regarding  
+shutdown occurrence and system configuration: when  
+shutdown occurs (for example, on battery power or after  
+running for a while), the frequency of shutdowns, which  
+applications are running at the time, and shutdown  
+repeatability.  
+2. Refer to HT200553: If your Mac restarted because of a  
+problem.  
+3. Attempt to start up in Safe Mode to verify that the  
+computer can start up completely without any issues.  
+Refer to HT201262: How to use safe mode on your Mac  
+for more information.  
+4. Important: Check for and apply the latest software and  
+firmware updates to the user＊s computer. Retest for the  
+user＊s original issue before continuing with further  
+troubleshooting. To determine if the user＊s Mac needs  
+Computer shuts down during startup.  updating, refer to HT201260: Find out which macOS  
+Computer shuts down unexpectedly during use.  your Mac is using. To update macOS, refer to  
+Computer restarts and displays a kernel panic alert  HT201541: How to update the software on your Mac. If  
+message.  an update is available, perform the update on the user＊s 
+Computer freezes during use.  computer and repeat this process until no further 
+Computer freezes upon wake from sleep.  updates are available. Then retest for the user＊s original  
+issue before continuing with further troubleshooting.  
+5. Run AST 2 Mac Resource Inspector diagnostic suite  
+(MRI) to gather diagnostic information about the  
+computer. MRI will report a failure if any sensors are not  
+detected or are exceeding expected thermal values. An  
+unreadable thermal sensor can cause intermittent  
+shutdowns.  
+Also run Cooling System Diagnostic suite (CSD). CSD  
+works like a stress test on the computer, gathering  
+information about the thermal performance while various  
+components are under heavy use.  
+If MRI or CSD report any thermal sensor or fan failures,  
+return to the list of symptoms and select ※Computer  
+Feels Unusually Warm or has Unusual Odors§.  
+Otherwise, continue troubleshooting.  
+6. Refer to TP1907: Common Troubleshooting Procedures  
+for Mac Computers with Apple Silicon before performing  
+further troubleshooting.  
+
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Power or thermal issues can cause intermittent shutdowns. Run AST 2 Mac Resource Inspector diagnostic suite (MRI) to check for problems detected by sensors and fans. Identify the specific type of failure reported in MRI: Thermal sensor, fan failure, voltage or current sensor, or some other failure. There are three types of sensors that are used in the computer: voltage, current, and temperature. The sensor type is identified by the first letter in the sensor key. Voltage sensor keys start  Yes  Go to step 3.  ${nodeText.yesSymptomCode}  
+No  Go to step 2.  ${nodeText.noSymptomCode}  
+with ※V§ Current sensor keys start with ※I§ Temperature sensor keys start with ※T§ If MRI reports any thermal sensor or fan failures, return to the list of symptoms and select ※Computer Feels Unusually Warm or has Unusual Odors§.  
+Does MRI report any voltage or current sensor errors?  
+2.  Run AST 2 Full System Diagnostic suite and check whether the computer unexpectedly shuts down. Is the shutdown event reproducible?  Yes  Replace the logic board. Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. Verify that the issue is resolved.  M08  MLB  
+No  The issue cannot be duplicated.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Check diagnostic results for failures related to power supply current or voltage sensor errors. 
+
+Yes 3. 
+Did diagnostics report any power supply current or voltage sensor errors? 
+Replace the power supply. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+POWER
+P02 
+SUPPLY 
+Go to step 4.
+No 
+
+${nodeText.noSymptomCode} 
+Yes 
+Check diagnostic results for logic board current or voltage sensor errors. 
+
+4. 
+Did diagnostics report any logic board current or voltage sensor 
+errors? 
+No 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+
+M08 
+MLB 
+${nodeText.noSymptomCode} 
+The issue is 
+Yes 
+resolved. 
+
+${nodeText.yesSymptomCode} 
+5.  Run AST 2 Post-Repair Diagnostic suite if available, to verify that the computer does not unexpectedly shut down, and to ensure no other issues remain.  ESCALATION  
+Verify that the issue is resolved.  No  REQUIRED.  
+Contact CSS for  
+Is the issue resolved?  additional support or a multipart repair.  
+
+${nodeText.noSymptomCode} 
+
+
+Startup Issues 
+Unlikely causes: Likely Causes: Logic board. Quick Check 
+Symptoms Quick Check 
+
+1. 
+Disconnect all peripherals. 
+
+2. 
+Determine whether the computer has power by confirming that any of the following function correctly: 
+
+
+
+Status
+ indicator light illuminates 
+
+
+Fan
+ spinning sound 
+
+
+An
+ external display functions 
+
+
+If the user＊s computer shows no signs of power, return to the list of symptoms and select ※No Power§. 
+3. Determine whether the computer is in DFU mode. Press and hold the power button for 10 seconds to attempt to shut down the computer. Then press the power button again to attempt to turn on the computer. If the computer turns on, then it was in DFU mode and has power. 
+
+The computer does not start up completely when it is 
+4. Refer to HT203576: Mac computer status Indicator Light turned on. 
+behavior. 
+
+The computer displays an exclamation point (!) with a 
+5. Refer to HT204267: If your Mac doesn＊t turn on or start circle around it. 
+up and HT211873: If your Mac starts up to a dark screen with ＆Options＊. 
+6. 
+Attempt to start up in Safe Mode to verify that the computer can start up completely without any issues. Refer to HT201262: How to use safe mode on your Mac for more information. 
+
+7. 
+If the user＊s Mac cannot start up to macOS and also cannot start up to macOS Recovery, an exclamation point with a circle around it is displayed. If you see this symbol when attempting to start up the user＊s computer, follow recommended steps in HT204156: If your Mac doesn't start up all the way. 
+
+8. 
+Refer to HT204463: If the fans in your Mac run at full speed when you turn it on. 
+
+9. 
+Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting. 
+
+
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Connect a known-good compatible external HDMI display to the user＊s computer. Verify that the computer＊s power cord is securely plugged into a known-good, grounded electrical outlet that provides adequate voltage and power to operate computer, and that the power cord is fully seated to the computer＊s AC inlet port. Attempt to turn on the computer by pressing its power button. Observe the status indicator light on the front of the computer. The light should turn on with a white color when the power button is pressed.  Yes  Go to step 2.  ${nodeText.yesSymptomCode}  
+No  Go to ※No Power§.  ${nodeText.noSymptomCode}  
+Does the status indicator light illuminate?  
+2.  Verify that the computer completes the startup process. Does the computer complete the startup process?  Yes  The issue cannot be duplicated.  ${nodeText.yesSymptomCode}  
+No  Go to step 3.  ${nodeText.noSymptomCode}  
+3.  Verify that the computer is turned off, then press and hold the power button for 10 seconds. Select macOS Recovery from Startup Options to start up into macOS Recovery. See HT201314: About macOS Recovery. Verify that the computer starts up to macOS Recovery.  Yes  Go to step 5.  ${nodeText.yesSymptomCode}  
+No  Go to step 4.  ${nodeText.noSymptomCode}  
+Does the computer start up to macOS Recovery?  
+4.  Revive the computer using Apple Configurator 2 User Guide and a host Mac. Important: Always ask if the user＊s data has been backed up first. Restart the computer and verify that it completes the startup process. Does the computer complete the startup process?  Yes  The issue was resolved by reviving the computer. Verify resolution.  ${nodeText.yesSymptomCode}  
+No  Go to step 8.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Go to step 6.
+Yes 
+
+${nodeText.yesSymptomCode} 
+Restart the computer and run AST 2 Full System Diagnostic suite on the computer. 
+
+5. Check diagnostic results for any failures. 
+No 
+Does the computer pass all tests? 
+Restart the computer to macOS Recovery. 
+Use Disk Utility to verify the 
+Yes computer＊s internal startup volume. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+The issue was resolved by repairing the startup volume using Disk Utility. Verify resolution. 
+
+M02 
+MLB 
+${nodeText.yesSymptomCode} 
+If errors are seen, use Disk Utility to repair the computer＊＊s internal
+
+6. 
+startup volume. 
+Restart the computer and verify Go to step 7.
+that it completes the startup No 
+
+${nodeText.noSymptomCode} process. 
+Does the computer complete the startup process? 
+
+Restart the computer to macOS  The issue was  
+Recovery.  resolved by  
+updating or  
+Use the ＆Install macOS＊ option to  Yes  reinstalling  
+update or reinstall macOS.  macOS. Verify  
+resolution.  
+Important: Always ask if the  
+
+${nodeText.yesSymptomCode} 
+user＊s data has been backed up 7. 
+first. 
+Restart the computer and verify that it completes the startup 
+Go to step 8.
+No ${nodeText.noSymptomCode}
+
+process. 
+Does the computer complete the startup process? 
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+8.  Restore the computer using using Apple Configurator 2 User Guide and a host Mac. Yes Important: Always ask if the user＊s data has been backed up first. The restore process will delete all user data and reinstall a new macOS and macOS Recovery.  The issue was resolved by restoring the computer. Verify resolution.  ${nodeText.yesSymptomCode}  
+Restart the computer and verify that it completes the startup process.  No  Go to step 9.  ${nodeText.noSymptomCode}  
+Does the computer complete the startup process?  
+
+Follow Service Guide procedures to open the computer.  ESCALATION  
+9.  Inspect all internal cables and connectors for damage.  Yes  REQUIRED. ${nodeText.yesSymptomCode} Contact CSS for  
+Are any internal cables or connectors damaged?  additional support or a multipart repair.  
+No  Go to step 10. ${nodeText.noSymptomCode}  
+
+Yes 
+Reseat the internal connections and reassemble the computer. 
+Restart the computer and verify that it completes the startup
+
+10. 
+process. 
+Does the computer complete the 
+No startup process? 
+The issue was resolved by reseating the internal connections. Verify resolution. 
+Replace the logic board. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+${nodeText.yesSymptomCode} 
+M24 
+MLB 
+Check 
+Verify that the computer can now complete the startup process over multiple trials. 
+Run AST 2 Post-Repair11. 
+
+Diagnostic suite if available, to ensure no other issues remain. 
+Is the issue resolved? 
+
+Result 
+Yes 
+No 
+Action 
+The issue is resolved. 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+
+Code 
+Commodity 
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+
+
+No Power 
+Unlikely causes: Likely Causes: Power supply, rear I/O wall, coin battery. Quick Check 
+Symptoms  Quick Check  
+The computer does not turn on when the power button is pressed. Power button does not click properly or at all. Power button has stiff or spongy feel when pressed.  1. Disconnect all peripherals. 2. Determine whether the computer has power by confirming that any of the following function correctly: Status indicator light illuminates Fan spinning sound An external display functions If the user＊s computer shows any signs of power, return to the list of symptoms and select ※Startup Issues§. 3. Determine whether the computer is in DFU mode. Press and hold the power button for 10 seconds to attempt to shut down the computer. Then press the power button again to attempt to turn on the computer. If the computer turns on, then it was in DFU mode and has power. 4. Refer to HT203576: Mac computer Sleep Indicator Light behavior. 5. Refer to HT204267: If your Mac doesn＊t turn on. 6. Refer to TP1907: Common Troubleshooting Procedures for Mac Computers with Apple Silicon before performing further troubleshooting.  
+
+Deep Dive 
+Check  Result  Action  Code  Commodity  
+1.  Connect a known-good compatible external HDMI display to the user＊s computer. Verify that the user＊s power cord is securely plugged into a known-good, grounded electrical outlet that provides adequate voltage and power to operate computer, and that the power cord is fully seated to the computer＊s AC inlet port. Attempt to turn on the computer by pressing its power button. Observe the status indicator light on the front of the computer. The light should turn on with a white color when the power button is pressed. Does the status indicator light illuminate?  Yes  Go to step 2.  ${nodeText.yesSymptomCode}  
+No  Go to step 4.  ${nodeText.noSymptomCode}  
+Next, check for an image on the connected external display.  Yes  Go to step 3.  ${nodeText.yesSymptomCode}  
+2.  Is an image clearly visible on the connected external display?  No  Go to ※Startup Issues§.  ${nodeText.noSymptomCode}  
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Restart the user＊s computer and  The issue cannot  
+verify that it completes the startup Yes  be duplicated.  ${nodeText.yesSymptomCode}  
+process.  
+3.  Go to ※Startup  
+Does the computer complete the  No  Issues§.  ${nodeText.noSymptomCode}  
+startup process?  
+Inspect user＊s power cord for wire Yesor connector damage. Also  Go to step 5.  ${nodeText.yesSymptomCode}  
+inspect the computer＊s AC inlet  
+port for signs of arcing or  
+4.  damaged pins that affect power cord connections.  No  Go to step 7.  ${nodeText.noSymptomCode}  
+Did you find any damaged  
+components?  
+Replace the  
+Determine if damage affects  user＊s power  
+5.  user＊s AC power cord or the computer＊s AC inlet port.  Yes  cord. Verify that the  X03  EXTERNAL CABLE  
+issue is resolved.  
+Does damage only affect the  
+power cord?  No  Go to step 6.  ${nodeText.noSymptomCode}  
+Replace the  
+power supply.  
+Refer to the  
+Service Guide to  
+complete all  
+applicable  
+procedures and  
+diagnostic suites  
+Yes  after part replacement to  P16  POWER SUPPLY  
+ensure that the  
+Determine if damage affects computer＊s AC inlet port or other  new part operates properly with the rest of the  
+6.  parts.  system.  
+Does damage only affect AC inlet port?  Verify that the issue is resolved.  
+
+ESCALATION REQUIRED.
+
+No ${nodeText.noSymptomCode} 
+Contact CSS for additional support or a multipart repair. 
+
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Yes  
+10.  Determine whether there is damage to the power supply cable or its connector, the logic board, or to a combination of multiple components.  
+Is the damage limited to the power supply cable or its connector?  
+No  
+
+Replace the power supply. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+
+POWER
+P16 
+SUPPLY 
+${nodeText.noSymptomCode} 
+Reseat the power supply cable to 
+Go to step 12.
+Yes 
+
+${nodeText.yesSymptomCode}
+the logic board. 
+
+11.  Reassemble the computer. Reconnect the power cord and attempt to turn on the computer.  No  The issue was resolved by reseating the power supply connector to the  
+Does the issue persist after reseating the power supply connector?  logic board.  
+
+${nodeText.noSymptomCode} 
+Follow Service Guide procedures Yesto open the computer and remove the logic board to access the power button flex cable connector on the logic board.  Go to step 13.  ${nodeText.yesSymptomCode}  
+12.  Disconnect the power button flex cable from the logic board and inspect the cable and connector for damage.  No  Go to step 14.  ${nodeText.noSymptomCode}  
+Is damage found on the logic board connector or power button flex cable?  
+
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Yes 
+Determine whether the damage is located on the flex cable, or other parts. 
+
+13. 
+Is the damage limited to the cable? 
+The power button and flex cable are part of the rear I/O wall. 
+Replace the rear I/O wall. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+OTHER
+X13 
+BOARD 
+ESCALATION REQUIRED.
+
+No ${nodeText.noSymptomCode} 
+Contact CSS for additional support or a multipart repair. 
+
+14. 
+Check 
+Note: This step requires multimeter test probes with a very fine point in order to make contact with the gold contacts on the end of the power button flex cable. The power button and its flex cable are part of the rear I/O wall. Do not replace the rear I/O wall unless you are using the correct multimeter probes when testing the power button flex cable. 
+Follow Service Guide procedures to open the computer and remove the logic board to access the power button flex cable connector on the logic board. 
+Disconnect the power button flex cable from the logic board and inspect the cable and connector for damage. 
+When viewing the gold contacts on the end of the power button flex cable, the left three contacts carry the power button signal, and the right three contacts are connected to ground. 
+Using a multimeter set as ohm meter, verify continuity between any of the left three contacts and any of the right three contacts of the power button flex cable when the power button is pressed. 
+A properly working power button should be open (disconnected) when the button is released and closed (connected) when the button is pressed. 
+A meter reading of 0 to 0.2 次 (ohms) means that the power button has continuity (the button is closed or connected). 
+A meter reading of 0.2 次 (ohms) to ﹢ (infinity) means that the power button does not have continuity (the button is open or disconnected). 
+For additional information on using a multimeter, see TP1957: Using a digital multimeter. 
+Does power button have continuity when button is pressed and open when released? 
+
+Result 
+Yes 
+No 
+Action 
+Go to step 15. 
+The power button and flex cable are part of the rear I/O wall. 
+Replace the rear I/O wall. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+Code 
+Commodity 
+${nodeText.yesSymptomCode} 
+OTHER
+X13 
+BOARD 
+Check 
+
+Result 
+Action 
+
+Code 
+Commodity 
+Reconnect the power button flex 
+Go to step 16.
+Yes 
+
+${nodeText.yesSymptomCode}
+cable to the logic board. 
+Reassemble the computer. Reconnect the power cord and attempt to turn on the computer15. 
+
+using the power button. 
+No 
+Does the issue persist after reseating the power button flex cable connector? 
+Remove the coin battery from the logic board. Measure the logic board coin battery voltage. 
+Carefully touch one multimeter probe to each pad to measure an expected coin battery voltage of 3 volts DC. If the voltage is 2.7 
+YesVDC or less, replace the coin16. 
+
+battery. 
+For additional information on using a multimeter, see TP1957: Using a digital multimeter. 
+Is the coin battery voltage low 
+(2.7 VDC or less)? 
+The issue was resolved by reseating the power button flex cable connection to the logic board. 
+Replace coin cell battery. 
+Note: Effective immediately, some coin cell batteries used on Mac systems are now available only from electronics parts distributors (for example, MCM). The coin battery is no longer available to order via GSX. Please order this battery from an electronics parts distributor. 
+Note: BR2032 and CR2032 batteries have the same form factor and nominal voltage. However, BR2032 batteries have a lower self-discharge rate and broader operating temperature range than CR2032 batteries for longer shelf and service life. 
+Verify that the issue is resolved. 
+
+${nodeText.noSymptomCode} 
+OTHER
+X32 
+ELECTRIC 
+Go to step 17.
+No 
+
+${nodeText.noSymptomCode} 
+Check Result 
+
+Yes 
+Reinstall and reseat the coin battery on the logic board. 
+Reassemble the computer. Reconnect the power cord and
+
+17. 
+attempt to turn on the computer. 
+Does the computer show any signs of power activity? 
+No 
+Action 
+Replace coin cell battery. 
+Note: Effective immediately, some coin cell batteries used on Mac systems are now available only from electronics parts distributors (for example, MCM). The coin battery is no longer available to order via GSX. Please order this battery from an electronics parts distributor. 
+Note: BR2032 and CR2032 batteries have the same form factor and nominal voltage. However, BR2032 batteries have a lower self-discharge rate and broader operating temperature range than CR2032 batteries for longer shelf and service life. 
+Verify that the issue is resolved. 
+Replace the power supply. 
+Refer to the Service Guide to complete all applicable procedures and diagnostic suites after part replacement to ensure that the new part operates properly with the rest of the system. 
+Verify that the issue is resolved. 
+
+Code 
+Commodity 
+OTHER
+X32 
+ELECTRIC 
+POWER
+P01 
+SUPPLY 
+Check 
+Verify that the computer can now turn on and complete the startup process over multiple trials. 
+Run AST 2 Post-Repair18. 
+
+Diagnostic suite if available, to ensure no other issues remain. 
+Is the issue resolved? 
+
+Result 
+Yes 
+No 
+Action 
+The issue is resolved. 
+ESCALATION REQUIRED. 
+Contact CSS for additional support or a multipart repair. 
+
+Code 
+Commodity 
+${nodeText.yesSymptomCode} 
+${nodeText.noSymptomCode} 
+
+
+Take-Apart Procedure Notes 
+Reassembly Steps 
+When the take-apart procedure doesn＊t include a final list of parts that you need to reinstall to complete reassembly, reinstall parts in the reverse order in which they＊re listed in the beginning of the Removal section. 
+
+Images 
+Some service guide articles include images of preproduction devices. There may be small differences between the image shown and the device you＊re servicing, but the procedures are the same unless noted. 
+Screw Sizes 
+All screw sizes are about the total length of the screw. 
+
+
+Mac mini (M1, 2020) Required Tools 
+Mac mini (M1, 2020) Required Tools 
+Note: Hand Tools for Repairs (OP101) provides a full list of tools required for Mac repairs, including details on purchasing tools. 
+ESD-Safe Workstation Required Equipment and Tools 
+
+ESD
+ procedures should be followed at all times. The following items are required for safe troubleshooting and repair. 
+
+
+Grounded
+ ESD Mat 
+
+
+ESD
+ wrist strap with clip/plug 
+
+
+ESD
+ storage bags to hold components 
+
+
+
+
+See 
+OP100: Electrostatic Discharge Precautions and Myths for more information. 
+
+
+The following tools are required for repair: 
+Antenna tool (923-01322)  Black stick (922-5065, 4-pack)  ESD-safe tweezers  
+Torque driver (923-0735) Adjustable, 0.3每1.2 Newton meters (Nm)  Torx T6 security bit (923-00304)  Torx T10 bit (923-0740)  
+Torx T6 screwdriver  
+ 
+ 
+
+
+Cosmetic Care 
+Cosmetic surfaces have a high exposure to potential damage or scratching. Be careful not to damage the housing and other cosmetic surfaces with inadvertent tool movements. In general, avoid scratching interior or exterior surfaces. 
+
+
+Mac mini (M1, 2020) Bottom Cover 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Before you begin: 
+
+Shut
+ down the computer. 
+
+
+Unplug
+ all cables. 
+
+
+Place
+ the computer on a clean, flat surface. 
+
+
+
+
+Tools 
+
+Black stick 
+
+
+Steps For Removal 
+
+2. 
+Rotate the black stick around the edge of the bottom cover. Listen for three audible clicks as the bottom cover disengages from the antenna plate screws below. 
+
+3. 
+Lift away the bottom cover. 
+
+
+
+
+Steps For Reassembly 
+
+2. Press down to engage the clips on the bottom cover with the tall screws on the antenna plate. 3. Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+
+Mac mini (M1, 2020) Antenna Plate 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Remove: 
+
+Bottom Cover 
+
+
+Tools 
+
+Torx
+ T6 security bit (923-00304) 
+
+
+Adjustable torque driver 0.3每1.2 Nm (923-0735) Torx T6 screwdriver 
+
+
+Black
+ stick 
+
+
+
+
+ESD-safe tweezers Antenna tool (923-01322) 
+
+
+
+Steps For Removal 
+1. Use the adjustable torque driver set to 0.3 Nm with the T6 security bit to remove six T6 security screws in the order shown. 
+Screws 1, 2, 3 = 923-00157 Screws 4, 5, 6 = 923-00155 
+
+
+
+2. 
+Insert the pointed end of a black stick into one of the ventilation holes and slightly lift the antenna plate off to the side (1). The antenna plate is attached to the logic board by the antenna cable and ground screw (2). Caution: Use care when rotating the antenna plate to avoid scratching the housing. 
+
+3. 
+Rotate the computer 180o to easily access the antenna cable and ground screw. The front of the housing should be facing you. 
+
+4. 
+Remove one T6 ground screw (923-03034). 
+
+
+
+
+
+5. Use the antenna tool to disconnect the antenna cable from the logic board, then remove the antenna plate. 
+
+
+Steps For Reassembly 
+1. Rest the antenna plate on the housing with the antenna cable positioned over the antenna connector on the logic board. 
+
+2. Loosely install the T6 ground screw (923-03034). 
+
+3. Use the flat end of the antenna tool to connect the antenna cable to the logic board. 4. Fully tighten the T6 ground screw. 
+
+
+5. 
+Rotate the computer 180o so the I/O wall is facing you. Align the screw holes in the antenna plate and housing. 
+
+6. 
+Use the adjustable torque driver set to 0.3 Nm with the T6 security bit to reinstall the six T6 security screws in the order shown. 
+
+
+
+Screws 1, 2, 3 = 923-00157 Screws 4, 5, 6 = 923-00155 
+
+
+
+7. 
+Reinstall the bottom cover. 
+
+8. 
+Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+
+
+Mac mini (M1, 2020) Coin Cell Battery 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Remove: 
+
+Bottom
+ Cover 
+
+
+Antenna
+ Plate 
+
+
+
+
+Tools 
+
+Black
+ stick 
+
+
+Nitrile
+ gloves (optional, not shown) 
+
+
+
+
+Steps For Removal 
+2. Gently pinch the coin cell battery between the black stick and your finger. Lift the coin cell battery up (1) and slide it out toward the fan (2). 
+
+
+Note: A nitrile glove may provide more grip when removing the coin cell battery. 
+
+
+Steps For Reassembly 
+
+Warning: Install only a BR1632A coin cell battery. If installed incorrectly or replaced with an incorrect type of coin cell battery, there is a risk of explosion. Dispose of used batteries according to local environmental laws and guidelines 
+
+3. 
+Reinstall the antenna plate. 
+
+4. 
+Reinstall the bottom cover. 
+
+5. 
+Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+
+
+Mac mini (M1, 2020) Fan 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Remove: 
+
+Bottom
+ Cover 
+
+
+Antenna
+ Plate 
+
+
+
+
+Tools 
+
+Black stick Torx T6 screwdriver 
+
+
+
+Steps For Removal 
+1. 
+Orient the computer so that the I/O wall is facing away from you. Remove four T6 screws (923-02803) from the fan. 
+
+2. 
+Lift the fan up to locate the flex cable connector underneath. 
+
+
+
+
+3. Use a black stick to disconnect the flex cable from the logic board. 
+
+
+Steps For Reassembly 
+1. Connect the fan flex cable to the logic board. 2. Align the fan with the standoffs and reinstall four T6 screws (923-02803). 
+
+
+3. 
+Reinstall the antenna plate. 
+
+4. 
+Reinstall the bottom cover. 
+
+5. 
+Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+
+
+Mac mini (M1, 2020) Logic Board 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Important: 
+
+Completing the System Configuration suite (TP1901) is required for this procedure. Run the System Configuration suite to configure the replacement part with the computer. 
+Remove: 
+
+Bottom
+ Cover 
+
+
+Antenna
+ Plate Fan 
+
+
+
+
+
+Tools 
+
+Torx T10 bit (923-0740) 
+
+Adjustable torque driver 0.3每1.2 Nm (923-0735) 
+
+ESD-safe tweezers (optional) 
+
+Black stick 
+
+
+Steps For Removal 
+1. Lift the locking lever (1) then disconnect the status indicator light (SIL) cable (2) from the logic board. 2. Pinch the sides of the power supply cable and pull firmly to disconnect it from the logic board. 
+
+
+3. Use the adjustable torque driver set to 1.2 Nm with the T10 Torx bit to remove the two T10 screws (923-02802) from the logic board. 
+
+4. Push on the heat sink to slide the logic board out of the housing. 
+
+
+Steps For Reassembly 
+Important: If you are installing the original logic board, skip to reassembly step 3. If you are installing a replacement logic board, ensure you complete all reassembly steps. 
+1. 
+Transfer the speaker (RP1714) and I/O wall (RP1716) from the known-bad board (KBB) logic board to the known-good 
+
+2. 
+Scan the 2D barcode on the KBB logic board and KGB logic board to ensure the serial numbers are accurately entered into the repair system. Caution: Don't enter random serial numbers. If you don't accurately enter both KBB and KGB logic board serial 
+
+3. 
+Slide the logic board into the housing. Ensure the SIL cable (1) and power supply cable (2) don't get trapped under the logic board. 
+
+
+board (KGB) logic board. 4. Push on the I/O wall to fully install the logic board in the housing. Ensure the I/O wall clips engage with the housing. 
+
+
+
+
+5. Use the adjustable torque driver set to 1.2 Nm with the T10 Torx bit to reinstall two T10 screws (923-02802) in the logic board. 
+
+6. Connect the power supply cable to the logic board. Ensure the cable is positioned under the cable cover in the housing. 
+
+7. 
+Connect the SIL cable to the logic board (1), then close the locking lever (2). 
+
+8. 
+Reinstall the fan. 
+
+9. 
+Reinstall the antenna plate. 
+
+10. 
+Reinstall the bottom cover. 
+
+
+
+Important: 
+11. 
+Run the System Configuration suite (TP1901) to configure the replacement part with the computer. Completing the System Configuration suite is required for this procedure. 
+
+12. 
+Run Apple Configurator 2 (TP1954) to install the latest macOS and firmware. 
+
+13. 
+Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+
+
+Mac mini (M1, 2020) Power Supply 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Remove: 
+
+Bottom
+ Cover 
+
+
+Antenna
+ Plate Fan 
+
+
+Logic
+ Board 
+
+
+
+
+
+Tools 
+
+Black stick Torx T6 screwdriver 
+
+
+ESD-safe tweezers 
+
+
+Steps For Removal 
+1. Remove three T6 screws (923-02796) from the power supply. 3. Pull the AC inlet cowling (923-02795) off the AC inlet. 
+
+
+
+4. Rotate the AC inlet 90o counterclockwise. 5. Slide the power supply out of the housing. 
+
+
+
+Steps For Reassembly 
+Important: To assist with reassembly steps 1 and 2, look or feel for the two grooves near the front edge of the housing, also shown in the image below. The AC inlet rotates into the back groove furthest away from the housing edge. These grooves are difficult to see after the power supply is installed in reassembly step 1. 
+
+1. Slide the power supply into the housing. 
+
+2. Rotate the AC inlet 90o clockwise into the second groove in the housing. 3. Reinstall the AC inlet cowling (923-02795) over the AC inlet. 
+
+
+4. 
+Reinstall the AC inlet retention clip (923-02789) around the AC inlet. 
+
+5. 
+Reinstall three T6 screws (923-02796) in the power supply. 
+
+6. 
+Reinstall the parts in the following order to complete reassembly: 
+
+1. 
+Logic Board 
+
+2. 
+Fan 
+
+3. 
+Antenna Plate 
+
+4. 
+Bottom Cover 
+
+
+
+7. 
+Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+
+
+
+
+
+Mac mini (M1, 2020) Speaker 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Remove: 
+
+Bottom
+ Cover 
+
+
+Antenna
+ Plate Fan 
+
+
+Logic
+ Board 
+
+
+
+
+
+Tools 
+
+Black stick Torx T6 screwdriver 
+
+
+
+Steps For Removal 
+1. Remove two T6 screws (923-02801) from the speaker. Important: The speaker cable is connected to the logic board directly beneath the speaker assembly. 
+
+
+Steps For Reassembly 
+1. Use the black stick to connect the speaker cable to the logic board. 2. Align the speaker screw holes with the standoffs on the logic board and reinstall the two T6 screws (923-02801). 
+
+
+3. Reinstall the parts in the following order to complete reassembly: 
+1. 
+Logic Board 
+
+2. 
+Fan 
+
+3. 
+Antenna Plate 
+
+4. 
+Bottom Cover 
+
+
+4. Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+Mac mini (M1, 2020) I/O Wall 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Remove: 
+
+Bottom
+ Cover 
+
+
+Antenna
+ Plate Fan 
+
+
+Logic
+ Board Speaker 
+
+
+
+
+
+
+Tools 
+
+Black stick Torx T6 screwdriver Antenna tool (923-01322) 
+
+
+
+
+Steps For Removal 
+1. 
+Turn over the logic board and locate the power button flex cable. Flip the locking lever (1) and remove the power button 
+
+2. 
+Turn over the logic board. Use the flat end of a black stick to loosen the adhesive between the logic board and power button flex cable. 
+
+
+
+
+3. Rotate the logic board to access the antenna cables. Use the antenna tool to disconnect the two antenna cables from 
+
+4. Lift up on the antenna cables to remove them from the three ground clips. 5. Remove one T6 ground screw (923-00230) from the logic board (1) and two T6 screws (923-02800) (2) from the side of 
+
+
+6. 
+Rotate the logic board and remove two T6 screws (923-02800) from the other side of the heat sink. 
+
+7. 
+Pull about 1-inch (2.5-cm) of the long antenna cable through the channel under the heat sink. Important: The long antenna cable routes through a channel under the heat sink. To avoid damage, pull the long 
+
+8. 
+Separate the I/O wall from the logic board and heat sink about 1-inch (2.5-cm). 
+
+
+
+
+
+9. Rotate the I/O wall to the left, then carefully pull the long antenna cable out through the channel under the heat sink. 
+
+
+Steps For Reassembly 
+1. Insert the long antenna cable into the channel under the heat sink. 2. Gently push the long antenna cable through the channel as you align the I/O wall with the heat sink and logic board. 
+
+
+3. Align the mounting brackets of the I/O wall with the sides of the heat sink. Press the I/O wall flush against the logic board and heat sink. 
+
+4. Reinstall two T6 screws (923-02800) in the side of the heat sink. 
+
+5. Rotate the logic board and reinstall one T6 ground screw (923-00230) in the logic board (1). Then, reinstall two T6 screws (923-02800) in the other side of the heat sink (2). 
+(1) one T6 ground screw = 923-00230 
+(2) two T6 screws = 923-02800 
+
+
+
+6. Press the antenna cables into the three ground clips on the logic board. Note: The long antenna cable crosses over the short antenna cable. 
+
+7. Use the flat end of the antenna tool to reconnect the two antenna cables to the logic board. 
+
+8. Rotate the logic board to access the power button flex cable. With the flat end of a black stick, press on the power button flex cable to adhere it to the logic board. 
+
+9. Turn over the logic board. Reconnect the power button flex cable (1) and close the locking lever (2). 
+
+10. Reinstall the parts in the following order to complete reassembly: 
+1. 
+Speaker 
+
+2. 
+Logic Board 
+
+3. 
+Fan 
+
+4. 
+Antenna Plate 
+
+5. 
+Bottom Cover 
+
+
+11. Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+Mac mini (M1, 2020) Housing 
+First Steps 
+
+Warning: 
+
+Don't apply external power while the computer is under repair. 
+Caution: 
+
+Only 
+Apple-certified technicians (OP1859) should perform this procedure. 
+
+
+Wear
+ an ESD wrist strap and take precautions to avoid ESD (OP100). 
+
+
+Remove: 
+
+Bottom
+ Cover 
+
+
+Antenna
+ Plate Fan 
+
+
+Logic
+ Board 
+
+
+Power
+ Supply 
+
+
+
+
+
+Tools 
+
+No tools required 
+
+Steps For Removal 
+Cosmetic Care: Cosmetic surfaces have a high exposure to potential damage or scratching. Be careful not to damage the housing and other cosmetic surfaces with inadvertent tool movements. In general, avoid scratching interior or exterior surfaces. 
+When all other parts have been removed, the housing is the remaining part. A replacement housing includes the following: 
+1. 
+Power supply cable cover 
+
+2. 
+Fan standoff screws (923-04956) 
+
+3. 
+Status indicator light (SIL) flex cable 
+
+
+
+Note: The standoff screws (923-04956) can be replaced. 
+
+
+Steps For Reassembly 
+Reinstall parts in the following order to complete reassembly: 
+1. 
+Power Supply 
+
+2. 
+Logic Board 
+
+3. 
+Fan 
+
+4. 
+Antenna Plate 
+
+5. 
+Bottom Cover 
+
+6. 
+Run the appropriate post-repair diagnostic suites (TP1909). 
+
+
+
+
+System Configuration for Mac Computers with Apple Silicon 
+
+Important: If you replace the logic board in the user's computer, ensure the user has their data backed up. Data can't be recovered after the System Configuration suite is run. 
+Contents of this article: 
+
+About
+ System Configuration 
+
+
+When
+ System Configuration is Required 
+
+
+Before
+ Starting an Apple Service Toolkit 2 (AST 2) Session 
+
+
+System
+ Configuration Steps 
+
+
+Troubleshooting
+ Tips 
+
+
+
+
+About System Configuration 
+The AST 2 System Configuration suite is a required repair completion tool that configures a Mac after certain repair procedures. These repair procedures aren't complete until you successfully run the System Configuration suite. The System Configuration suite is not a diagnostic substitute and post-repair diagnostic testing (TP1909) must be completed after every repair. 
+System Configuration for Mac computers with Apple silicon has been simplified: 
+
+A
+ host computer is no longer required 
+
+
+DFU
+ mode is no longer required 
+
+
+Important: If you are attempting to complete the repair of an Intel-based Mac with the Apple T2 Security Chip, refer to TP1657: System Configuration for Mac Computers with the Apple T2 Security Chip. 
+Successfully running the System Configuration suite: 
+
+Ensures
+ repair quality and compliance with regional communications regulations. 
+
+
+Enables
+ hardware encryption, biometric authentication, and secure startup protection. 
+
+
+Optimizes
+ performance and verifies proper configuration of hardware components. 
+
+
+Conducts
+ tests that verify that you correctly replaced parts and correctly reconnected parts during the repair, including the Touch ID sensor, ambient light sensor, Touch Bar, display, and camera. 
+
+
+Pairs
+ the Touch ID sensor and Touch Bar to the logic board and updates their calibration values for performance optimization. 
+
+
+Writes
+ the system serial number to the new logic board and reports it to Apple (if you replaced the logic board). Note: Reporting the logic board serial number to Apple enables iCloud services including FaceTime, Messages, and Apple Pay, and assigns the wireless region. 
+
+
+You
+ can see the completed steps in the AST 2 Diagnostic Console by selecting the suite in Diagnostics Results and clicking Details. 
+
+
+Note: For the purpose of this procedure the term Unit Under Test (UUT) will be used to describe the user's computer. 
+
+When System Configuration is Required 
+Perform System Configuration after these parts are replaced: 
+Model MacBook Air (M1, 2020) MacBook Pro (13-inch, M1, 2020) Mac mini (M1, 2020)  Display Logic Board Top Case Touch ID Board . . . . . . . .  
+
+Important: If you replaced the logic board, run the System Configuration suite, then use Apple Configurator 2 (TP1954) to install the latest version of macOS, macOS Recovery, and update the firmware. 
+
+
+Before Starting an AST 2 Session 
+1. 
+Add the parts you replaced to the repair system. 
+
+2. 
+Enter the known-bad board (KBB) and known-good board (KGB) serial numbers into the repair system. 
+
+
+Caution: 
+
+You must use upper case characters for letters in the logic board serial number. To ensure accuracy, it is recommended to scan the 2D barcode. 
+
+If you enter wrong serial numbers or don't save the repair, the System Configuration suite won't become available. 
+3. Save the repair. 
+
+System Configuration Steps 
+For additional guidance, watch the Post-Repair Procedures (SV461) service video. 
+
+2. On the UUT, press and hold the power button for 10 seconds to start up to startup options. Important: After replacing a logic board, the UUT will automatically start up in Diagnostics Mode, during which you'll hear the UUT chime twice. Skip to step 4. 
+
+3. Press and hold Command + D to start diagnostics. 
+
+4. Connect to the network (Wi-Fi or Ethernet). 
+
+5. Proceed with the Terms and Conditions. 
+
+6. Confirm that a blue bar is next to the UUT in the AST 2 Diagnostic Console. Important: Refer to the Troubleshooting Tips section at the bottom of this article if the bar next to the UUT does not turn blue. 
+
+7. Choose the System Configuration suite from the AST 2 Diagnostic Console. 
+
+8. The UUT will begin to run the System Configuration suite and will show a progress bar on the display. 
+
+9. Results will appear in the AST 2 Diagnostic Console once the System Configuration suite is complete. If System 
+
+10. If issues are found and the System Configuration suite fails, follow the instructions on the AST 2 Diagnostic Console and escalate to Channel Service Support (CSS). 
+Important: 
+
+If you replaced the logic board, follow the restore steps in the Apple Configurator 2 User Guide to install the latest 
+version of macOS, macOS Recovery, and update the firmware. Additional details are available in When to use Apple Configurator 2 for Mac Computers with Apple Silicon. 
+
+Run the necessary post-repair diagnostic tests and suites (TP1909) to ensure a successful repair. 
+
+For notebooks, ensure you run trackpad calibration check (TP1314) anytime the computer is opened. 
+
+
+Troubleshooting Tips 
+
+If
+ the UUT does not activate (the gray bar doesn't turn blue) in the AST 2 Diagnostic Console, verify the following information: 
+
+
+The
+ UUT is connected to the internet over Wi-Fi or Ethernet. 
+
+
+The
+ UUT system serial number is correctly entered in the AST 2 Diagnostics Console and matches the serial number used to create the repair. 
+
+
+You
+ correctly added the parts to the repair, the KBB and KGB part serial numbers are correct, and the repair has been saved. 
+
+
+
+
+If
+ the System Configuration suite isn't available, perform the following steps in the order listed: 
+
+1. 
+Verify the troubleshooting steps above. 
+
+2. 
+Archive and restart the diagnostic session. 
+
+3. 
+Restart the UUT into Diagnostics Mode. 
+
+4. 
+Open the UUT and confirm that all parts are properly installed and all flex cables are securely connected. 
+
+5. 
+If it has been more than 14 days since a logic board, top case, or display KGB serial number was added to the repair, escalate to CSS. 
+
+
+
+
+If
+ the diagnostic session is interrupted (the blue bar turns gray), perform the following steps: 
+
+
+Archive
+ and restart the diagnostic session. 
+
+
+Check
+ the network connection. 
+
+
+Open
+ the UUT and confirm that all parts are properly installed and all flex cables are securely connected. 
+
+
+
+
+Change
+ the language on the UUT 
+
+
+
+The diagnostic session language on the UUT is determined by the language set in the user's macOS. If you need to change the language, start up the computer to the user's macOS and select a different language. 
+
+Mac mini (M1, 2020) Exploded View 
+
+1. Bottom Cover 
+
+923-02436 
+
+2. Antenna Plate 
+
+923-02437 
+
+3. Fan 
+
+923-04329 
+
+4. AC Inlet Retention Clip 
+
+923-02789 
+5. 
+AC Inlet Cowling 
+
+6. 
+Speaker 
+
+7. 
+Logic Board 
+
+
+
+923-02795 
+
+923-02435 
+
+Apple M1 chip, 8-core CPU, 8-core GPU, 16-core Neural Engine 661-16773, 8GB, 256GB 661-16775, 8GB, 512GB 661-16777, 8GB, 1TB 661-16779, 8GB, 2TB 661-16781, 16GB, 256GB 661-16783, 16GB, 512GB 661-16785, 16GB, 1TB 661-16787, 16GB, 2TB 
+
+
+
+
+
+
+
+
+8. I/O Wall 
+
+923-04717 
+9. Power Supply 
+
+661-16789 
+10. Housing 
+
+923-04716 Includes the fan standoff screws, power supply cable cover, and status indicator light (SIL) flex cable. 
+
+Not shown 
+
+Power Cord, 923-00645 
+Mac mini (M1, 2020) Screw Chart 
+Screws are in numerical order and are not to scale. 
+923-00155 923-00157 T6 security T6 security Antenna plate (3) Antenna plate (3) Note: Screws must be tightened to a torque value of 0.3 Nm. Note: Screws must be tightened to a torque value of 0.3 Nm. 923-02796 923-02800 T6 T6 Power Supply (3) I/O wall to heat sink (4) 923-02802 923-02803 T10 T6 Logic Board (2) Fan (4) Note: Screws must be tightened to a torque value of 1.2 Nm.  923-00230 T6 I/O wall to logic board (1) Note: Captive washer included. 923-02801 T6 Speaker (2) 923-03034 T6 Antenna Cable Ground Screw Antenna Plate (1) Note: Captive washer included.  
+
+
+

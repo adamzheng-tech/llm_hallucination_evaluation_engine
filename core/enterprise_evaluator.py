@@ -4,14 +4,14 @@ import csv
 import asyncio
 import aiohttp
 import json
-import fitz  # PyMuPDF
+import fitz  # PyMuPDF, The "Mu" in MuPDF stands for the Greek letter mu (\(\mu \)), which is the standard scientific abbreviation for "micro-". It was chosen to reflect the library's foundational focus on extreme precision, microscopic detail, and accuracy when handling document structure and rendering.
 import argparse
-import glob
+import glob  # The glob module is designed for finding file pathnames on your hard drive using shell-style wildcards. The re module is a powerful engine for matching patterns within strings, such as searching for email addresses or validating phone numbers.
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Structural Mapping: Domestic Relay Node
+# Structural Mapping: Domestic Relay Node (relay: an electronic device that receives radio or television signals and sends them on again with greater strength, e.g., a relay station)
 API_KEY = os.environ.get("POIXE_API_KEY", "").strip()
 API_URL = "https://api.poixe.com/v1/chat/completions"
 MODEL = "gpt-4o-mini:free" 
@@ -55,6 +55,22 @@ def retrieve_relevant_context(chunks: list, claim: str, top_k: int = 2) -> str:
     # Reconstruct the optimized context block
     targeted_context = "\n---[CONTEXT GAP]---\n".join([chunks[i] for i in top_indices])
     return targeted_context
+
+def extract_claims(file_path: str) -> list:
+    """Parses a generative markdown payload and extracts discrete claims as string elements."""
+    claims = []
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                stripped_line = line.strip()
+                # Filter out empty strings and structural markdown metadata
+                if stripped_line and not stripped_line.startswith(('#', '---', '***')):
+                    # Strip leading bullet/list characters to isolate the raw semantic claim
+                    clean_claim = re.sub(r'^[\-\*\+]\s+', '', stripped_line)
+                    claims.append(clean_claim)
+    except Exception as e:
+        print(f"I/O Error reading payload node {file_path}: {str(e)}")
+    return claims
 
 async def evaluate_claim(session: aiohttp.ClientSession, semaphore: asyncio.Semaphore, optimized_context: str, claim: str) -> dict:
     """Executes deterministic Boolean verification using targeted semantic context."""
@@ -125,22 +141,6 @@ async def evaluate_claim(session: aiohttp.ClientSession, semaphore: asyncio.Sema
                 }
         except Exception as e:
             return {"claim": claim, "status": "EXECUTION_FAILURE", "reason": str(e)}
-
-def extract_claims(file_path: str) -> list:
-    """Parses a generative markdown payload and extracts discrete claims as string elements."""
-    claims = []
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                stripped_line = line.strip()
-                # Filter out empty strings and structural markdown metadata
-                if stripped_line and not stripped_line.startswith(('#', '---', '***')):
-                    # Strip leading bullet/list characters to isolate the raw semantic claim
-                    clean_claim = re.sub(r'^[\-\*\+]\s+', '', stripped_line)
-                    claims.append(clean_claim)
-    except Exception as e:
-        print(f"I/O Error reading payload node {file_path}: {str(e)}")
-    return claims
 
 async def process_batch(truth_path: str, payload_path: str, output_csv: str, session: aiohttp.ClientSession, semaphore: asyncio.Semaphore):
     """Executes the pipeline using TF-IDF routing."""
