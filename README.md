@@ -1,40 +1,96 @@
 # LLM Hallucination Evaluation Engine
 
-> **RESTRICTED DEPLOYMENT LICENSE (Proprietary / CC BY-NC 4.0)**
-> *The deterministic evaluation engine, testing matrices, and vulnerability payloads contained within this repository are proprietary intellectual property. Commercial deployment, integration into enterprise CI/CD pipelines, or usage by corporate entities for internal Large Language Model auditing strictly requires commercial authorization. Academic and local non-commercial review is permitted.*
+A Python learning and portfolio project for checking claims against a supplied document.
+It retrieves passages with TF-IDF, asks an LLM to assess support, validates quoted evidence,
+and writes an auditable CSV. Results are model judgments, not guarantees of truth.
 
-A deterministic Retrieval-Augmented Generation (RAG) evaluation pipeline engineered to cross-reference generative payloads against unstructured enterprise documentation.
-
-## 1. Production Architecture (V2)
-
-* **Dynamic Data Ingestion:** Utilizes `PyMuPDF` for C-level binary text extraction from native PDF assets (e.g., technical service guides, enterprise earnings reports), bypassing fragile plaintext dependencies.
-* **Domestic API Relay:** Routes asynchronous HTTP payloads through the Poixe API gateway (`gpt-4o-mini:free`), eliminating international DNS friction while preserving standard REST schemas.
-* **Deterministic Evaluation Matrix:** Enforces Strict JSON Schema output (`response_format`) to mathematically bind the LLM-as-a-Judge to a binary Boolean state (`PASS` or `FAIL_HALLUCINATION`), stripping conversational autonomy and preventing output parsing failures.
-
-## 2. Execution Protocol
-
-CRITICAL: Absolute environment isolation is required. Never execute without injecting the target cryptographic token directly into the active OS session.
+## Quick start (macOS / Linux, Python 3.10+)
 
 ```bash
-pip install aiohttp PyMuPDF
-set POIXE_API_KEY=your_target_key
-python enterprise_evaluator.py
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python core/enterprise_evaluator.py --source examples/reference.txt --claims examples/claims.md --dry-run --output outputs/preview.csv
+python -m unittest discover -s tests -v
 ```
 
-## 3. Evaluated Vulnerability Vectors
+Run commands from the repository root. Use a new output filename on each run; existing
+outputs are not overwritten. `--dry-run` performs real document extraction and retrieval,
+but makes **no API calls** and labels every row `NOT_EVALUATED`.
 
-The following table:
+## Live evaluation
 
-| Vector ID | Foundational Logic Trap | Arbitrage Domain |
-| :--- | :--- | :--- |
-| `cultural_idiom_literalism` | Evaluates LLM reliance on literal translation over contextual anatomical reality. | High-Context Business Pragmatics |
-| `geo_academic_slang` | Tests failure rates against highly localized socioeconomic involution terminology. | Regional Academic Lexicons |
-| `cross_domain_collision` | Calculates structural divergence when identical syntax occupies distinct physical engineering and linguistic realities. | CFD vs. TCSOL Semantics |
-| `high_context_omission` | Forces strict zero-inference neutrality in gender-omitted syntax arrays. | Linguistic Structural Constraints |
+Configure an OpenAI-compatible Chat Completions provider and a model available to your account.
+Do not commit keys. `.env.example` documents names; this program does **not** auto-load `.env`.
+In macOS's default zsh, enter the key without displaying it or storing it in shell history:
 
-## 4. Algorithmic Complexity
+```zsh
+read -s 'OPENAI_API_KEY?API key: '; echo
+export OPENAI_API_KEY
+export OPENAI_BASE_URL='https://your-provider.example/v1'
+export OPENAI_MODEL_NAME='your-supported-model'
+python core/enterprise_evaluator.py --source examples/reference.txt --claims examples/claims.md --output outputs/live.csv
+```
 
-* **Ingestion Phase:** $O(P)$ time complexity, where $P$ is the physical PDF page count.
-* **Network Execution:** $O(C/M)$ wall-clock duration, where $C$ is the total discrete claim count and $M$ is the strictly enforced aiohttp concurrency limit ($M=5$).
-* **Evaluation Engine:** $O(1)$ memory lookup combined with an $O(N \cdot T)$ Boolean scan where $T$ is the normalizer.
-* **Space Complexity:** $O(S)$ linear memory allocation strictly bound to the extracted document string length during execution.
+`POIXE_API_KEY` is also accepted as a fallback. Model and provider have no hardcoded defaults.
+No proxy is used unless you explicitly pass `--proxy URL`.
+Default response format is `json_object`; use `--response-format json_schema` if your provider
+supports strict structured outputs, or `--response-format text` if it supports neither.
+All modes validate the returned object and quotes locally. There is no automatic format downgrade.
+
+Options: `--top-k 2`, `--timeout 60` (seconds per attempt), `--concurrency 3`, `--attempts 3`.
+Only connection failures, timeouts, HTTP 429 and HTTP 5xx are retried, with bounded exponential delay.
+Malformed responses and permanent HTTP errors become `ERROR` rows. Exit codes: 0 = completed,
+1 = one or more claim errors, 2 = input/configuration failure. A completed run does not imply accurate judgments.
+
+## Data flow and output
+
+1. Read one PDF (text layer), TXT or Markdown source; keep page/paragraph identifiers.
+2. Read one claim per line from the claims file; ignore headings and separators.
+3. Fit TF-IDF once on the document and retrieve passages per claim.
+4. Ask the model for a judgment with exact quotes and validate those quotes against retrieved text.
+5. Save claim, source path, requested model, status, reason, evidence and full retrieved passages to CSV.
+
+| Status | Meaning |
+| --- | --- |
+| `SUPPORTED` | Retrieved passages support the entire claim |
+| `CONTRADICTED` | Retrieved passages explicitly conflict with the claim |
+| `INSUFFICIENT_EVIDENCE` | Retrieved passages do not settle the claim |
+| `NOT_EVALUATED` | Retrieval preview only |
+| `ERROR` | Request or output validation failed |
+
+`SUPPORTED` and `CONTRADICTED` require nonempty verbatim citations. Quote validation proves
+that the text occurs in a retrieved passage; it does not prove that the quote justifies the verdict.
+
+## Verification and limitations
+
+- `examples/expected.json` contains manually specified labels for three fictional examples.
+  Compare these with a live run; these examples are a smoke check, not an accuracy benchmark.
+- Automated tests cover retrieval, PDF page IDs, quote validation, dry-run, CSV transport,
+  transient retries and permanent failures using a local mock API. They do not measure LLM accuracy.
+- Lexical retrieval can miss synonyms, negation context and evidence on other pages. Absence
+  from retrieved passages does not establish falsity. A zero-overlap result is marked insufficient.
+- English stop words are used. Chinese and multilingual retrieval have not been evaluated.
+- Scanned PDFs need OCR; tables and reading order can be imperfect. Long pages may exceed model limits.
+- One line is treated as one claim; automatic atomic-claim extraction is not implemented.
+- Schema constraints and low temperature cannot guarantee semantic correctness or determinism.
+- Prompt instructions reduce but do not eliminate prompt-injection risk.
+- No held-out accuracy, latency or cost benchmark has been established. This is not a production or clinical system.
+
+## Repository map
+
+- `core/enterprise_evaluator.py`: maintained CLI and main learning path.
+- `tests/`: offline regression tests.
+- `examples/`: small fictional reference, claims and expected labels.
+- [中文学习路线](docs/LEARNING.md): how to understand and extend the main path.
+- Other `core/` scripts, existing `data/`, `claims/`, `logs/` and `master_evaluation.csv`:
+  historical experiments and artifacts, outside the maintained CLI. Historical outputs are not
+  validation results for this revision. Some scripts use different paths/providers.
+
+The former `--truth_dir` / `--payload_dir` interface is replaced by explicit `--source` / `--claims`
+file arguments. This avoids silently evaluating every payload against one hardcoded PDF.
+
+## License
+
+See [LICENSE](LICENSE) for the repository's existing noncommercial terms. Third-party source
+documents retain their respective rights; the fictional quick-start examples need none of those PDFs.
